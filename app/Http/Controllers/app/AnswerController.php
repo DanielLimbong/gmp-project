@@ -58,9 +58,12 @@ class AnswerController extends Controller
         // Redirect atau melakukan tindakan lainnya sesuai kebutuhan Anda
         return redirect()->back()->with('success', 'Pertanyaan berhasil dibuat.');
         }
-
         public function answerIndex($question_id){
-            $answers = Answer::where('question_id', '=', $question_id)->get();
-            return response()->json($answers);
+        $answers = Answer::where('question_id', '=', $question_id)->get();
+        return response()->json($answers);
+        }
+        public function allAnswerIndex(){
+        $answers = Answer::all();
+        return response()->json($answers);
         }
 }
