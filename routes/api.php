@@ -23,7 +23,7 @@ Route::get('/question', [QuestionController::class, 'apkIndex']);
 Route::post('apklogin', [LoginController::class, 'apklogin']);
 Route::get('/question/{area_id}', [QuestionController::class, 'questionIndex']);
 Route::get('/area', [AreaController::class, 'areaIndex']);
-Route::get('/answer', [AnswerController::class, 'answerIndex']);
+Route::get('/answer', [AnswerController::class, 'allAnswerIndex']);
 Route::get('/answer/{question_id}', [AnswerController::class, 'answerIndex']);
 Route::get('/daily+inspection+summary', [InspectionController::class, 'inspectionIndex']);
 Route::post('/store-inspections', [InspectionController::class, 'storeInspection']);
