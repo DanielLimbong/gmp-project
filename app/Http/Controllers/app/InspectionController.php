@@ -114,14 +114,14 @@ class InspectionController extends Controller
         $dailyInspection->question_id = $item['question_id'];
         $dailyInspection->answer_id = $item['answer_id'];
         $dailyInspection->score_point = $score_point;
-        $dailyInspection->created_at = $item['created_at'];
+        $dailyInspection->created_at = strtotime($item['created_at']);
         $dailyInspection->updated_at = null;
         $dailyInspection->save();
 
 
         } else {
         // Jika area tidak ditemukan
-        return response()->json(['message' => 'Invalid area data'], 400);
+        return response()->json(['message' => 'Invalid area data', 'id' => $id], 400);
         }
         } else {
         // Jika pertanyaan atau jawaban tidak ditemukan
