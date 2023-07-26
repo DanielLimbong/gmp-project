@@ -55,20 +55,14 @@
           <td>{{ $area->created_at }}</td>
 					<td>{{ $area->deletion_indicator }}</td>
 					<td class="project-actions text-right">
-						<a class="btn btn-primary btn-sm" href="#">
-							<i class="fas fa-eye">
-							</i>
-						View
-						</a>
-						<a class="btn btn-info btn-sm" href="{{ route('area.edit', $area) }}">
-							<i class="fas fa-pencil-alt">
-							</i>
-							Edit
-						</a>
+							<button class="btn btn-primary btn-sm view-area" data-toggle="modal" data-target="#viewAreaModal" data-area="{{ $area }}">
+									<i class="fas fa-eye"></i> View
+							</button>
+							<a class="btn btn-info btn-sm" href="{{ route('area.edit', $area) }}">
+									<i class="fas fa-pencil-alt"></i> Edit
+							</a>
 							<a class="btn btn-danger btn-sm" href="#">
-								<i class="fas fa-trash">
-							</i>
-							Delete
+									<i class="fas fa-trash"></i> Delete
 							</a>
 					</td>
 					
@@ -82,18 +76,63 @@
 		</div>
 	</div>
 </div>
-
+  <div class="modal fade" id="viewAreaModal" tabindex="-1" role="dialog" aria-labelledby="viewAreaModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewAreaModalLabel">View Area Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="areaId">ID:</label>
+                        <input type="text" class="form-control" id="areaId" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="areaName">Area Name:</label>
+                        <input type="text" class="form-control" id="areaName" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="areaCreated">Created:</label>
+                        <input type="text" class="form-control" id="areaCreated" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="areaStatus">Status:</label>
+                        <input type="text" class="form-control" id="areaStatus" readonly>
+                    </div>
+                    <!-- Add more fields as needed to display area details -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 @section('js')
       <script>
-				$(document).ready(function() {
-				$('#area_table').DataTable( {
-						dom: 'Bfrtip',
-						buttons: [
-								'copy', 'csv', 'excel', 'pdf', 'print'
-						]
-				} );
-		} );
-      </script>
-		@endsection
+        $(document).ready(function() {
+            $('#area_table').DataTable({
+                dom: 'Bfrtip',
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+            });
+
+            $('.view-area').on('click', function() {
+                var area = $(this).data('area');
+
+                // Populate the modal with area details
+                $('#areaId').val(area.id);
+                $('#areaName').val(area.area_name);
+                $('#areaCreated').val(area.created_at);
+                $('#areaStatus').val(area.deletion_indicator);
+
+                // Show the modal
+                $('#viewAreaModal').modal('show');
+            });
+        });
+    </script>
 @endsection
+
 
