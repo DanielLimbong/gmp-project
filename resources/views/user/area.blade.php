@@ -53,7 +53,7 @@
 					<td>{{ $area->id }}</td>
 					<td>{{ $area->area_name }}</td>
           <td>{{ $area->created_at }}</td>
-					<td>{{ $area->status }}</td>
+					<td>{{ $area->deletion_indicator }}</td>
 					<td class="project-actions text-right">
 						<a class="btn btn-primary btn-sm" href="#">
 							<i class="fas fa-eye">

@@ -58,17 +58,19 @@
                                         Update Point
                                     </a>
                                 @else
-                                    <a class="btn btn-info ml-2 d-flex align-items-center justify-content-center"
-                                        style="width: 150px; cursor: pointer;"
-                                        href="{{ route('inspection.update-point') }}">
-                                        Update Point
-                                    </a>
+                                <button class="btn btn-info ml-2 d-flex align-items-center justify-content-center" style="width: 150px;" data-toggle="modal" data-target="#updatePointModal">
+                                    Update Point
+                                </button>
                                 @endif
 
                                 @if ($dailyInspectionSummary->status === 'Approved') 
                                     <button class="btn btn-success ml-2" style="width: 150px;" disabled> Approved</button>
                                 @else
-                                    <button class="btn btn-success ml-2" style="width: 150px;"> Approved</button>
+                                <form action="{{ route("update.status", $dailyInspectionSummary) }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-success ml-2" style="width: 150px;" type="submit"> Approved</button>
+                                </form>
+                                    
                                 @endif
                             </div>
                         </div>
@@ -103,6 +105,28 @@
     </div>
     </div>
 </div>
+    <div class="modal fade" id="updatePointModal" tabindex="-1" role="dialog" aria-labelledby="updatePointModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updatePointModalLabel">Update Score Point</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route("update.point", $dailyInspectionSummary) }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="scorePoint">New Score Point:</label>
+                            <input type="number" class="form-control" id="scorePoint" name="score_point" value="{{ $dailyInspectionSummary->score_point }}" placeholder="{{ $dailyInspectionSummary->score_point }}" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
 

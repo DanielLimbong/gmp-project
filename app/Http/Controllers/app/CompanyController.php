@@ -23,6 +23,25 @@ class CompanyController extends Controller
     public function createCompany(){
         return view ('company.create');
     }
+    public function getEditCompany(Company $company){
+          
+        return view ('company.edit', ['company' => $company]);
+    }
+    public function EditCompany(Request $request, Company $company){
+        try{
+            // $company
+            $company->name = $request->input('name') ?: old('name', $company->name);
+            $company->company_code = $request->input('company_code') ?: old('name', $company->company_code);
+            $company->save();
+
+            $companies = Company::all();
+            Alert::success('success', 'Company updated successfully');
+            return redirect()->route('company.list')->with('success', 'Company updated successfully!');
+        }catch(\Exception $e){
+            return redirect()->back()->with('error', 'Failed to update company. Please try again.')->withInput();
+        }
+        
+    }
 
     public function storeCompany(Request $request){
         $id = IdGenerator::generate(['table' => 'companies', 'length' => 4, 'prefix' => date('C')]);

@@ -45,13 +45,19 @@ Route::get('/daily-inspection/{area}', [InspectionController::class, 'showInspec
 Route::get('/inspection-detail/{dailyInspectionSummary}', [InspectionController::class,'inspectionDetail'])->name('inspection.detail');
 Route::get('/inspection-area', [InspectionController::class, 'inspectionArea'])->name('inspection.area');
 Route::get('/inspection-update-point', [InspectionController::class,'getUpdatePoint'])->name('inspection.update-point');
+Route::post('/inspection-update-status/{dailyInspectionSummary}', [InspectionController::class,'updateStatus'])->name('update.status');
+Route::post('/inspection-update-point/{dailyInspectionSummary}', [InspectionController::class,'updatePoint'])->name('update.point');
 
 // user
 Route::get('/user-details', [UserController::class, 'getUserList'])->name('user.detail');
 Route::get('/area', [UserController::class, 'getAreaList'])->name('user.area');
 Route::get('/create-user', [UserController::class, 'getCreateUser'])->name('user.create');
 Route::get('/view-user/{user}', [UserController::class, 'ViewUser'])->name('user.view');
+Route::get('/edit-user/{user}', [UserController::class, 'getEditUser'])->name('user.edit');
+Route::post('/edit-user/{user}', [UserController::class, 'editUser'])->name('user.put');
 Route::post('/store-user', [UserController::class, 'storeUser'])->name('user.store');
+Route::post('/delete-user/{user}', [UserController::class, 'deleteUser'])->name('user.delete');
+Route::post('/activate-user/{user}', [UserController::class, 'activateUser'])->name('user.activate');
 
 // area
 Route::get('/create-area', [AreaController::class, 'getCreateArea'])->name('area.create');
@@ -62,6 +68,8 @@ Route::post('/post-area/{area}', [AreaController::class, 'editArea'])->name('are
 // company
 Route::get('list-company', [CompanyController::class, 'getCompany'])->name('company.list');
 Route::get('create-company', [CompanyController::class, 'createCompany'])->name('company.create');
+Route::get('edit-company/{company}', [CompanyController::class, 'getEditCompany'])->name('company.edit');
+Route::post('edit-company/{company}', [CompanyController::class, 'editCompany'])->name('company.put');
 Route::post('store-company', [CompanyController::class, 'storeCompany'])->name('company.store');
 });
 

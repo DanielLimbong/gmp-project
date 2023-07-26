@@ -67,7 +67,7 @@
                             alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="{{ route('auth.profile') }}" class="d-block">Admin MIP</a>
+                        <a href="{{ route('auth.profile') }}" class="d-block">{{ auth()->user()->name }}</a>
                     </div>
                 </div>
 

@@ -13,6 +13,7 @@ use App\Models\DailyInspection;
 use App\Models\DailyInspectionSummary;
 use App\Models\User;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use RealRashid\SweetAlert\Facades\Alert;
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,6 +56,31 @@ class InspectionController extends Controller
     public function inspectionIndex(){
     $inspections = DailyInspectionSummary::all();
     return response()->json($inspections);
+    }
+
+    public function updateStatus(DailyInspectionSummary $dailyInspectionSummary){
+        try{
+        $dailyInspectionSummary->status = "Approved";
+        $dailyInspectionSummary->save();
+        Alert::success('success', 'Status Updated!')->autoClose(3000);
+        return redirect()->route("inspection.detail", $dailyInspectionSummary)->with('success', 'Status Updated!');
+        } catch (\Exception $e) {
+        return redirect()->route("inspection.detail", $dailyInspectionSummary)->with('error', 'Failed to update status.
+        Please try again.')->withInput();
+        }
+    }
+
+    public function updatePoint(Request $request, DailyInspectionSummary $dailyInspectionSummary){
+        try{
+        $dailyInspectionSummary->score_total = $request->input('score_point');
+        $dailyInspectionSummary->status = "Approved";
+        $dailyInspectionSummary->save();
+        Alert::success('success', 'Score Total Updated!')->autoClose(3000);
+        return redirect()->route("inspection.detail", $dailyInspectionSummary)->with('success', 'Score Total Updated!');
+        } catch (\Exception $e) {
+        return redirect()->route("inspection.detail", $dailyInspectionSummary)->with('error', 'Failed to update Score Total.
+        Please try again.')->withInput();
+        }
     }
 
     public function storeInspection(Request $request)
