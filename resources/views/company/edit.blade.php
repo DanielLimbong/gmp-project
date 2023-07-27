@@ -11,12 +11,12 @@
     @csrf
 		<div class="card-body">
 			<div class="form-group">
+				<label for="exampleInputEmail1">Company Code</label>
+				<input type="text" class="form-control" id="exampleInputEmail1" placeholder="{{ old('company_code', $company->company_code) }}" name="company_code" disabled></div>
+			<div class="form-group">
 				<label for="exampleInputEmail1">Company Name</label>
 				<input type="text" class="form-control" id="exampleInputEmail1" placeholder="{{ old('name', $company->name) }}" name="name"></div>
 
-			<div class="form-group">
-				<label for="exampleInputEmail1">Company Code</label>
-				<input type="text" class="form-control" id="exampleInputEmail1" placeholder="{{ old('company_code', $company->company_code) }}" name="company_code"></div>
 
     {{-- <div class="form-check">
       <input class="form-check-input" type="checkbox" name="status" value="active">

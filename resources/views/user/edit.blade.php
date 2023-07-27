@@ -13,7 +13,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="exampleSelectBorder">Company</label>
-                    <select class="custom-select form-control-border" id="exampleSelectBorder" name="company_code">
+                    <select class="custom-select form-control-border" id="exampleSelectBorder" name="company_code" disabled>
                         <option value="{{ $users->companies->company_code }}" selected disabled>{{ old('company_', $users->companies->name) }}</option>
                         @foreach ($companies as $company)
                             <option value="{{ $company->company_code }}">{{ $company->name }}</option>
@@ -22,7 +22,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">NIK</label>
-                    <input type="text" class="form-control" id="nik" placeholder="{{ old('nik', $users->nik) }}" name="nik">
+                    <input type="text" class="form-control" id="nik" placeholder="{{ old('nik', $users->nik) }}" name="nik" disabled>
                 </div>
 
                 <div class="form-group">

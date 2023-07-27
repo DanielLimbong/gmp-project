@@ -19,11 +19,11 @@ class AreaController extends Controller
     $prefix = 'A';
     $id = IdGenerator::generate(['table' => 'areas', 'length' => 3, 'prefix' => $prefix]);
     // $formattedId = sprintf("%03d", $id);
-    $status = $request->has('status') ? 'active' : 'non-nactive';
+    $deletion_indicator = $request->has('status') ? 'Active' : 'Deactive';
     $area = new Area;
     $area->id = $id;
     $area->area_name = $request->name;
-    $area->status = $status;
+    $area->deletion_indicator = $deletion_indicator;
     $area->save();
 
     return redirect()->route('user.area')->with('success', 'Area Created!');
@@ -41,8 +41,8 @@ class AreaController extends Controller
             $area_name = $request->name;
         }
         $area->area_name = $area_name;
-        $status = $request->has('status') ? 'active' : 'non-nactive';
-        $area->status = $status;
+        $deletion_indicator = $request->has('status') ? 'Active' : 'Deactive';
+        $area->deletion_indicator = $deletion_indicator;
         $area->save();
 
         return redirect()->route('user.area')->with('success', 'Area Edited!');

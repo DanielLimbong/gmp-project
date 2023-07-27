@@ -8,7 +8,7 @@
 
     <div class="card p-2">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card p-2 w-100">
                 <!-- Isi card pertama -->
                 <table class="table-sm">
@@ -40,37 +40,37 @@
                 </table>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card p-2 justify-content-end" style="background-color: #00aaff00;">
                 <!-- Isi card kedua -->
                 <div class="container-xxl">
                     <div class="row p-2">
                         <div class="col justify-content-end text-center p-2">
-                            <div class="d-flex p-2 text-right">
-                                <button class="btn btn-primary ml-2" style="width: 300px;">
-                                    <h5>Score Total: {{ $dailyInspectionSummary->score_total }}</h5>
-                                </button>
-                            </div>
+                            <div class="">
+                                        <div class="card" style="">
+                                            <div class="card-body">
+                                                <h4 class="text-center">Score Total : {{ $dailyInspectionSummary->score_total }}</h4>
+                                            </div>
+                                        </div>                      
+                                    </div>
                             <div class="d-flex">
                                 @if ($dailyInspectionSummary->status === 'Approved')
-                                    <a class="btn btn-info ml-2 d-flex align-items-center justify-content-center"
-                                        style="width: 150px; pointer-events: none; opacity: 0.5; cursor: not-allowed;">
+                                    <button class="btn btn-info ml-2 form-control" disabled>
                                         Update Point
-                                    </a>
+                                    </button>
                                 @else
-                                <button class="btn btn-info ml-2 d-flex align-items-center justify-content-center" style="width: 150px;" data-toggle="modal" data-target="#updatePointModal">
-                                    Update Point
-                                </button>
+                                    <button class="btn btn-info ml-2 form-control" data-toggle="modal" data-target="#updatePointModal">
+                                        Update Point
+                                    </button>
                                 @endif
 
                                 @if ($dailyInspectionSummary->status === 'Approved') 
-                                    <button class="btn btn-success ml-2" style="width: 150px;" disabled> Approved</button>
+                                    <button class="btn btn-success ml-2 form-control"  disabled> Approved</button>
                                 @else
-                                <form action="{{ route("update.status", $dailyInspectionSummary) }}" method="POST">
-                                    @csrf
-                                    <button class="btn btn-success ml-2" style="width: 150px;" type="submit"> Approved</button>
-                                </form>
-                                    
+                                    <form action="{{ route("update.status", $dailyInspectionSummary) }}" method="POST">
+                                        @csrf
+                                        <button class="btn btn-success ml-2 form-control"  type="submit"> Approved</button>
+                                    </form>    
                                 @endif
                             </div>
                         </div>
@@ -119,7 +119,8 @@
                         @csrf
                         <div class="form-group">
                             <label for="scorePoint">New Score Point:</label>
-                            <input type="number" class="form-control" id="scorePoint" name="score_point" value="{{ $dailyInspectionSummary->score_point }}" placeholder="{{ $dailyInspectionSummary->score_point }}" required>
+                            {{-- <input type="number" class="form-control" id="scorePoint" name="score_point" value="{{ $dailyInspectionSummary->score_point }}" placeholder="{{ $dailyInspectionSummary->score_point }}" required> --}}
+                            <input type="number" class="form-control" id="scorePoint" name="score_point"  value="{{ $dailyInspectionSummary->score_total }}" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Update</button>
                     </form>

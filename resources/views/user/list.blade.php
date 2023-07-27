@@ -56,49 +56,49 @@
                 <table class="table table-hover text-nowrap" id="user_table">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>NIK</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Company</th>
-                            <th>Position</th>
-                            <th>Division</th>
-                            <th></th>
+                            <th class="align-middle">ID</th>
+                            <th class="align-middle">NIK</th>
+                            <th class="align-middle">Name</th>
+                            <th class="align-middle">Email</th>
+                            <th class="align-middle">Company</th>
+                            <th class="align-middle">Position</th>
+                            <th class="align-middle">Division</th>
+                            <th class="align-middle">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
                         <tr>
-                            <td>{{ $user->id }}</td>
-                            <td>{{ $user->nik }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->company_code }}</td>
-                            <td>{{ $user->position }}</td>
-                            <td>{{ $user->division }}</td>
+                            <td class="align-middle">{{ $user->id }}</td>
+                            <td class="align-middle">{{ $user->nik }}</td>
+                            <td class="align-middle">{{ $user->name }}</td>
+                            <td class="align-middle">{{ $user->email }}</td>
+                            <td class="align-middle">{{ $user->company_code }}</td>
+                            <td class="align-middle">{{ $user->position }}</td>
+                            <td class="align-middle">{{ $user->division }}</td>
                             <td class="project-actions text-right">
 															<div class="d-flex">
 																	<!-- View Button -->
-																	<button class="btn btn-primary btn-sm view-user" data-toggle="modal" data-target="#viewUserModal" data-user="{{ $user }}">
-																			<i class="fas fa-eye"></i> View
+																	<button class="btn btn-primary view-user ml-4" data-toggle="modal" data-target="#viewUserModal" data-user="{{ $user }}">
+																			<i class="fas fa-eye"></i> 
 																	</button>
 																	<!-- Edit Button -->
-																	<a class="btn btn-info btn-sm ml-2" href="{{ route('user.edit', $user) }}">
-																			<i class="fas fa-pencil-alt"></i> Edit
+																	<a class="btn btn-info ml-4" href="{{ route('user.edit', $user) }}">
+																			<i class="fas fa-pencil-alt"></i> 
 																	</a>
 																	<!-- Delete Button -->
 																@if ($user->deletion_indicator === 'Yes')
 																		<form action="{{ route('user.activate', $user) }}" method="POST">
 																				@csrf
-																				<button type="submit" class="btn btn-danger btn-sm ml-2">
-																						<i class="fas fa-check"></i> Activate
+																				<button type="submit" class="btn btn-success  ml-4">
+																						<i class="fas fa-check"></i> 
 																				</button>
 																		</form>
 																@else
 																		<form action="{{ route('user.delete', $user) }}" method="POST">
 																				@csrf
-																				<button type="submit" class="btn btn-danger btn-sm ml-2">
-																						<i class="fas fa-trash"></i> Delete
+																				<button type="submit" class="btn btn-danger btn ml-4">
+																						<i class="fas fa-times"></i> 
 																				</button>
 																		</form>
 																@endif
@@ -152,10 +152,14 @@
                     <label for="userDivision">Division:</label>
                     <input type="text" class="form-control" id="userDivision" readonly>
                 </div>
+                <div class="form-group">
+                    <label for="userDivision">Role:</label>
+                    <input type="text" class="form-control" id="userRole" readonly>
+                </div>
                 <!-- Add more fields as needed to display user details -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -178,6 +182,7 @@
             $('#userCompany').val(user.company_code);
             $('#userPosition').val(user.position);
             $('#userDivision').val(user.division);
+            $('#userRole').val(user.role);
 
             // Show the modal
             $('#viewUserModal').modal('show');

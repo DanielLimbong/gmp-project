@@ -25,6 +25,7 @@
     <script src="sweetalert2.all.min.js"></script>
 
 
+
   
     
 </head>
@@ -52,18 +53,17 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="" class="brand-link">
-                <img src="{{ asset('images/download.png') }}" alt=""
-                    class="profile-user-img img-fluid img-circle" style="opacity: .8">
-                <span class="brand-text font-weight-light">Mandiri Coal</span>
-            </a>
+            <div class="brand-link">
+                <img src="{{ asset('images/download.png') }}" alt="" class="profile-user-img2 img-fluid">
+                <p class="brand-text">Mandiri Coal</p>
+            </div>
 
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
+                        <img src="{{ asset('images/profil.png') }}" class="img-circle elevation-2"
                             alt="User Image">
                     </div>
                     <div class="info">
@@ -294,6 +294,23 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     @yield('js')
+    <style>
+    .brand-link {
+        text-align: center;
+    }
+
+    .profile-user-img2 {
+        width: 150px;
+        height: 80px;
+        border-radius: 5%;
+        opacity: .8;
+        margin: 0 auto;
+    }
+
+    .brand-text {
+        font-weight: normal;
+    }
+</style>
 </body>
 
 </html>

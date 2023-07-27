@@ -1,26 +1,26 @@
 @extends('template')
 @section('header')
-    <h1>List Answer</h1>
+    <h2>List Answer</h2>
 @endsection
 @section('content')
-  <div class="col-md-3">
-      <button type="button" class="btn btn-block btn-success btn-lg">
-        <a class="text-white" href="{{ route('answer.create', $question) }}">+
-            Create
-            Answer
-        </a>
-    </button>
-            <div class="card-header">
-          <h3 class="card-title">{{ $question->text }}</h3>
+  <div class="container-xxl">
+    <div class="row">
+        <div class="col text-right">
+            <div class="d-flex justify-content-end pr-2">
+                <a href="{{ route('answer.create', $question) }}" class="btn btn-success ml-2" style="width: 150px;">
+                    <i class="fas fa-plus"></i> Create
+                </a>
+            </div>
         </div>
-  </div>
+    </div>
+</div>
   <br>
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card">
+  <div class="row p-2">
+    <div class="col-12 p-2">
+      <div class="card p-2">
 
 
-      <div class="card-body table-responsive p-0">
+      <div class="card-body table-responsive p-2">
         <table class="table table-hover text-nowrap" id="answer_detail">
           <thead>
             <tr>

@@ -41,28 +41,28 @@
 				<tr>
 					<th>ID</th>
 					<th>Area Name</th>
-          <th>Created</th>
+                    <th>Created</th>
 					<th>Status</th>
-          <th></th>
+                    <th class="text-center">Action</th>
 				</tr>
 				</thead>
 				<tbody>
           @foreach ($areas as $area)
         <tr>
 
-					<td>{{ $area->id }}</td>
-					<td>{{ $area->area_name }}</td>
-          <td>{{ $area->created_at }}</td>
-					<td>{{ $area->deletion_indicator }}</td>
+					<td class="align-middle">{{ $area->id }}</td>
+					<td class="align-middle">{{ $area->area_name }}</td>
+                    <td class="align-middle">{{ $area->created_at }}</td>
+					<td class="align-middle">{{ $area->deletion_indicator }}</td>
 					<td class="project-actions text-right">
-							<button class="btn btn-primary btn-sm view-area" data-toggle="modal" data-target="#viewAreaModal" data-area="{{ $area }}">
-									<i class="fas fa-eye"></i> View
+							<button class="btn btn-primary  view-area ml-4" data-toggle="modal" data-target="#viewAreaModal" data-area="{{ $area }}">
+									<i class="fas fa-eye"></i> 
 							</button>
-							<a class="btn btn-info btn-sm" href="{{ route('area.edit', $area) }}">
-									<i class="fas fa-pencil-alt"></i> Edit
+							<a class="btn btn-info ml-4" href="{{ route('area.edit', $area) }}">
+									<i class="fas fa-pencil-alt"></i> 
 							</a>
-							<a class="btn btn-danger btn-sm" href="#">
-									<i class="fas fa-trash"></i> Delete
+							<a class="btn btn-danger ml-4" href="#">
+									<i class="fas fa-times"></i> 
 							</a>
 					</td>
 					
@@ -105,7 +105,7 @@
                     <!-- Add more fields as needed to display area details -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

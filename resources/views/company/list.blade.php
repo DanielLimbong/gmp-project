@@ -38,27 +38,27 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Company Code</th>
-                            <th></th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($companies as $company)
                         <tr>
-                            <td>{{ $company->id }}</td>
-                            <td>{{ $company->name }}</td>
-                            <td>{{ $company->company_code }}</td>
+                            <td class="align-middle">{{ $company->id }}</td>
+                            <td class="align-middle">{{ $company->name }}</td>
+                            <td class="align-middle">{{ $company->company_code }}</td>
                             <td class="project-actions text-right">
                                 <!-- View Button -->
-                                <button class="btn btn-primary btn-sm view-company" data-toggle="modal" data-target="#viewCompanyModal" data-name="{{ $company->name }}" data-code="{{ $company->company_code }}">
-                                    <i class="fas fa-eye"></i> View
+                                <button class="btn btn-primary ml-4 view-company" data-toggle="modal" data-target="#viewCompanyModal" data-name="{{ $company->name }}" data-code="{{ $company->company_code }}">
+                                    <i class="fas fa-eye"></i> 
                                 </button>
                                 <!-- Edit Button -->
-                                <a class="btn btn-info btn-sm" href="{{ route('company.edit', $company) }}">
-                                    <i class="fas fa-pencil-alt"></i> Edit
+                                <a class="btn btn-info ml-4" href="{{ route('company.edit', $company) }}">
+                                    <i class="fas fa-pencil-alt"></i> 
                                 </a>
                                 <!-- Delete Button -->
-                                <a class="btn btn-danger btn-sm" href="#">
-                                    <i class="fas fa-trash"></i> Delete
+                                <a class="btn btn-danger ml-4" href="#">
+                                    <i class="fas fa-times"></i> 
                                 </a>
                             </td>
                         </tr>

@@ -1,6 +1,6 @@
 @extends('template')
 @section('header')
-    <h1>List Question</h1>
+    <h2>List Question</h2>
 @endsection
 @section('content')
 @if(session('success'))
@@ -45,7 +45,7 @@
                                 <th>Area</th>
                                 <th>Status</th>
                                 <th>Numbering</th>
-                                <th></th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,9 +68,8 @@
                                             @csrf
                                             @method('PUT')
                                             @if ($row->status == 'active')
-                                                <button type="submit" class="btn btn-block btn-danger">Deactivate</button>
-                                            @else
-                                                <button type="submit" class="btn btn-block btn-success">Activate</button>
+                                                <button type="submit" class="btn btn-danger view-area ml-4"> <i class="fas fa-times"></i></button>                                            @else
+                                                <button type="submit" class="btn btn-success view-area ml-4"><i class="fas fa-check"></i></button>
                                             @endif
                                         </form>
                                     </td>

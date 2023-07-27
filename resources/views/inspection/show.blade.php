@@ -16,10 +16,11 @@
 				<tr>
 					<th>Id</th>
 					<th>Name</th>
-					<th>Date</th>
+					<th>Created Date</th>
+					<th>Updated Date</th>
 					<th>Company</th>
 					<th>Status</th>
-					<th></th>
+					<th class="text-center">Action</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -28,10 +29,11 @@
 						<td>{{ $dailyInspectionSummary->id }}</td>
 						<td>{{ $dailyInspectionSummary->users->name }}</td>
 						<td>{{ $dailyInspectionSummary->created_at->formatLocalized('%d %B %Y') }}</td>
+						<td>{{ $dailyInspectionSummary->updated_at->formatLocalized('%d %B %Y') }}</td>
 						<td>{{ $dailyInspectionSummary->users->companies->name }}</td>
 						<td>{{ $dailyInspectionSummary->status }}</td>
 						<td>
-							<a href="{{ route('inspection.detail', $dailyInspectionSummary) }}" class="btn btn-block btn-outline-success btn-lg">Check</a>
+							<a href="{{ route('inspection.detail', $dailyInspectionSummary) }}" class="btn btn-info view-area ml-4"> <i class="fas fa-eye"></i> Detail</a>
 						</td>
 					</tr>
 				@endforeach
@@ -54,18 +56,20 @@
         toggleDataBtn.addEventListener('click', function() {
             let buttonText = toggleDataBtn.textContent;
             if (buttonText === 'Show NA Data') {
-                table.search('NA').draw();
+                table.column(5).search('NA').draw(); // Search pada kolom indeks 3 (status) dengan kata kunci 'NA'
                 toggleDataBtn.textContent = 'Show Approved Data';
             } else {
-                table.search('Approved').draw();
+                table.column(5).search('Approved').draw(); // Search pada kolom indeks 3 (status) dengan kata kunci 'Approved'
                 toggleDataBtn.textContent = 'Show NA Data';
             }
         });
 
         showAllDataBtn.addEventListener('click', function() {
-            table.search('').draw();
+            // table.search('').draw();
+						table.column(5).search('').draw(); // Mencari di seluruh kolom (menghapus filter pencarian)
         });
     });
 </script>
+
 
 @endsection

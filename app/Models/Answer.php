@@ -17,6 +17,7 @@ class Answer extends Model
         'question_id',
         'point',
         ];
+        protected $keyType = 'string';
 
         public function areas(): BelongsTo{
             return $this->belongsTo(Area::class, 'area_id');

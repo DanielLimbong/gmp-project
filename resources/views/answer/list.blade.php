@@ -1,13 +1,17 @@
 @extends('template')
 @section('header')
-    <h1>List Question</h1>
+    <h2>Select Question</h2>
 @endsection
 @section('content')
-    <div class="row">
+    <div class="container-xxl">
+        <div class="row">
         <div class="col-12">
 
-                <!-- /.card-header -->
-                <div class="card-body table-responsive p-0">
+                <div class="row p-2">
+                    <div class="col-12 p-2">
+                        <div class="card p-2">
+                            <!-- /.card-header -->
+                <div class="card-body table-responsive p-2">
                     <table class="table table-hover text-nowrap" id="answer_question">
                         <thead>
                             <tr>
@@ -15,7 +19,7 @@
                                 <th>Question</th>
                                 <th>Weight</th>
                                 <th>Area</th>
-                                <th></th>
+                                <th class="text-center">Action</th>
                                 {{-- <th>Numbering</th> --}}
                             </tr>
                         </thead>
@@ -27,10 +31,10 @@
                                     <td>{{ $row->weight }}</td>
                                     <td>{{ $row->areas->area_name }}</td>
                                     <td class="project-actions text-center">
-                                      <a class="btn btn-info btn-sm" href="{{ route('answer.detail', $row) }}">
+                                      <a class="btn btn-info view-area ml-4" href="{{ route('answer.detail', $row) }}">
                                         <i class="fas fa-pencil-alt">
                                         </i>
-                                        Answer
+                                         Manage Answer
                                       </a>
                                     </td>
                                     {{-- <td>{{ $row->numbering }}</td> --}}
@@ -41,6 +45,9 @@
 
 
                 </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- /.card-body -->
 
@@ -49,8 +56,8 @@
             <!-- /.card -->
 
         </div>
-
     </div>
+
     @section('js')
     <script>
         let table = new DataTable('#answer_question');
