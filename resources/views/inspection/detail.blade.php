@@ -53,26 +53,30 @@
                                             </div>
                                         </div>                      
                                     </div>
-                            <div class="d-flex">
-                                @if ($dailyInspectionSummary->status === 'Approved')
-                                    <button class="btn btn-info ml-2 form-control" disabled>
-                                        Update Point
-                                    </button>
-                                @else
-                                    <button class="btn btn-info ml-2 form-control" data-toggle="modal" data-target="#updatePointModal">
-                                        Update Point
-                                    </button>
-                                @endif
+                                        <div class="d-flex">
+                                            @if ($dailyInspectionSummary->status === 'Approved')
+                                                <button class="btn btn-info form-control" disabled>
+                                                    Update Point
+                                                </button>
+                                                <button class="btn btn-success ml-2 form-control" disabled> Approved</button>
+                                            @else
 
-                                @if ($dailyInspectionSummary->status === 'Approved') 
-                                    <button class="btn btn-success ml-2 form-control"  disabled> Approved</button>
-                                @else
-                                    <form action="{{ route("update.status", $dailyInspectionSummary) }}" method="POST">
-                                        @csrf
-                                        <button class="btn btn-success ml-2 form-control"  type="submit"> Approved</button>
-                                    </form>    
-                                @endif
-                            </div>
+                                                <button class="btn btn-info ml-2 form-control" data-toggle="modal" data-target="#updatePointModal">
+                                                    Update Point
+                                                </button>
+                                                <button class="btn btn-success ml-2 form-control" onclick="approveStatus('{{ route("update.status", $dailyInspectionSummary) }}')">Approved</button>
+
+                                                {{-- </form> --}}
+                                                {{-- <button class="btn btn-info form-control mr-4" data-toggle="modal" data-target="#updatePointModal">
+                                                    Update Point
+                                                </button>
+                                                <form action="{{ route("update.status", $dailyInspectionSummary) }}" method="POST">
+                                                    @csrf
+                                                    <button class="btn btn-success mr-4 form-control" type="submit"> Approved</button>
+                                                </form> --}}
+                                            @endif
+                                        </div>
+
                         </div>
                     </div>
                 </div>
@@ -143,5 +147,37 @@
 						]
 				} );
 		} );
+
+        function approveStatus(url) {
+        // Buat objek XMLHttpRequest
+        var xhr = new XMLHttpRequest();
+
+        // Atur callback saat permintaan selesai
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // Berhasil memperbarui status
+                    console.log('Status berhasil diperbarui.');
+                    // Jika Anda ingin melakukan tindakan tambahan setelah berhasil memperbarui status, tambahkan di sini.
+
+                    // Refresh halaman setelah berhasil memperbarui status
+                    window.location.reload();
+                } else {
+                    // Gagal memperbarui status
+                    console.error('Gagal memperbarui status.');
+                    // Jika Anda ingin menampilkan pesan error atau melakukan tindakan tambahan setelah gagal memperbarui status, tambahkan di sini.
+                }
+            }
+        };
+
+        // Buka koneksi ke URL dengan metode POST
+        xhr.open('POST', url, true);
+
+        // Atur header untuk mengirimkan token CSRF (jika diperlukan)
+        xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+
+        // Kirim permintaan
+        xhr.send();
+    }
     </script>
 @endsection
