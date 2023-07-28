@@ -183,7 +183,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('question.show') }}" class="nav-link">
+                                    <a href="{{ route('change.password') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Change Password</p>
                                     </a>

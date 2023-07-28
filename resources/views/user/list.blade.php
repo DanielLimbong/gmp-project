@@ -91,14 +91,14 @@
 																		<form action="{{ route('user.activate', $user) }}" method="POST">
 																				@csrf
 																				<button type="submit" class="btn btn-success  ml-4">
-																						<i class="fas fa-check"></i> 
+																						<i class="fas fa-check-square"></i> 
 																				</button>
 																		</form>
 																@else
 																		<form action="{{ route('user.delete', $user) }}" method="POST">
 																				@csrf
 																				<button type="submit" class="btn btn-danger btn ml-4">
-																						<i class="fas fa-times"></i> 
+																						<i class="fas fa-times-circle"></i> 
 																				</button>
 																		</form>
 																@endif

@@ -20,4 +20,6 @@ class Company extends Model
             public function users(): HasMany{
                 return $this->hasMany(User::class, 'company_code', 'company_code');
             }
+
+            
 }

@@ -49,7 +49,8 @@
                             <td class="align-middle">{{ $company->company_code }}</td>
                             <td class="project-actions text-right">
                                 <!-- View Button -->
-                                <button class="btn btn-primary ml-4 view-company" data-toggle="modal" data-target="#viewCompanyModal" data-name="{{ $company->name }}" data-code="{{ $company->company_code }}">
+                                <div class="d-flex">
+                                    <button class="btn btn-primary ml-4 view-company" data-toggle="modal" data-target="#viewCompanyModal" data-name="{{ $company->name }}" data-code="{{ $company->company_code }}">
                                     <i class="fas fa-eye"></i> 
                                 </button>
                                 <!-- Edit Button -->
@@ -57,9 +58,25 @@
                                     <i class="fas fa-pencil-alt"></i> 
                                 </a>
                                 <!-- Delete Button -->
-                                <a class="btn btn-danger ml-4" href="#">
-                                    <i class="fas fa-times"></i> 
-                                </a>
+                                {{-- <a class="btn btn-danger ml-4" href="{{ route('company.delete', $company) }}">
+                                    <i class="fas fa-times-circle"></i> 
+                                </a> --}}
+                                                                    @if ($company->deletion_indicator === 'Yes')
+																		<form action="{{ route('company.activate', $company) }}" method="POST">
+																				@csrf
+																				<button type="submit" class="btn btn-success  ml-4">
+																						<i class="fas fa-check-square"></i> 
+																				</button>
+																		</form>
+																@else
+																		<form action="{{ route('company.delete', $company) }}" method="POST">
+																				@csrf
+																				<button type="submit" class="btn btn-danger btn ml-4">
+																						<i class="fas fa-times-circle"></i> 
+																				</button>
+																		</form>
+																@endif
+                                </div>
                             </td>
                         </tr>
                         @endforeach

@@ -62,7 +62,7 @@
 									<i class="fas fa-pencil-alt"></i> 
 							</a>
 							<a class="btn btn-danger ml-4" href="#">
-									<i class="fas fa-times"></i> 
+									<i class="fas fa-times-circle"></i> 
 							</a>
 					</td>
 					

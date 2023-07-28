@@ -71,6 +71,8 @@ Route::get('create-company', [CompanyController::class, 'createCompany'])->name(
 Route::get('edit-company/{company}', [CompanyController::class, 'getEditCompany'])->name('company.edit');
 Route::post('edit-company/{company}', [CompanyController::class, 'editCompany'])->name('company.put');
 Route::post('store-company', [CompanyController::class, 'storeCompany'])->name('company.store');
+Route::post('/delete-company/{company}', [CompanyController::class, 'deleteCompany'])->name('company.delete');
+Route::post('/activate-company/{company}', [CompanyController::class, 'activateCompany'])->name('company.activate');
 });
 
 // Auth routes (without 'auth' middleware)
@@ -78,3 +80,5 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/profile', [ProfilController::class, 'showProfile'])->name('auth.profile');
+Route::get('/change-password', [ProfilController::class, 'getChangePassword'])->name('change.password');
+Route::post('/change-password', [ProfilController::class, 'changePassword'])->name('store.password');

@@ -28,7 +28,12 @@ class CompanyController extends Controller
         return view ('company.edit', ['company' => $company]);
     }
     public function EditCompany(Request $request, Company $company){
-        try{
+        $companyCode = $request->input('company_code');
+
+        $existingCompany = Company::where('company_code', $companyCode)
+            ->where('id', '!=', $company->id)
+            ->first();
+        if($existingCompany === null){
             // $company
             $company->name = $request->input('name') ?: old('name', $company->name);
             $company->company_code = $request->input('company_code') ?: old('name', $company->company_code);
@@ -37,13 +42,19 @@ class CompanyController extends Controller
             $companies = Company::all();
             Alert::success('success', 'Company updated successfully');
             return redirect()->route('company.list')->with('success', 'Company updated successfully!');
-        }catch(\Exception $e){
+        }else{
             return redirect()->back()->with('error', 'Failed to update company. Please try again.')->withInput();
         }
         
     }
 
     public function storeCompany(Request $request){
+                $companyCode = $request->input('company_code');
+
+                $existingCompany = Company::where('company_code', $companyCode)
+                // ->where('id', '!=', $company->id)
+                ->first();
+                if($existingCompany === null){
         $id = IdGenerator::generate(['table' => 'companies', 'length' => 4, 'prefix' => date('C')]);
         // $formattedId = sprintf("%03d", $id);
         $company = new Company;
@@ -56,7 +67,35 @@ class CompanyController extends Controller
     Alert::success('Success', "Company Created!");
     // $request->session()->flash('success', 'Company Created!');
     return redirect()->route('company.list')->with('success', 'Company Created!');
+            }else{
+                Alert::error('Error', 'Failed to create company. Please try
+                again.');
+            return redirect()->back()->with('error', 'Failed to create company. Please try
+            again.')->withInput();
+                            }
     }
+
+        public function deleteCompany(Company $company){
+        try{
+        $company->deletion_indicator = "Yes";
+        $company->save();
+        Alert::success('Success', 'company deleted successfully')->autoClose(3000);
+        return redirect()->route('company.list')->with('success', 'Company deleted successfully!');
+        } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Failed to delete company. Please try again.')->withInput();
+        }
+        }
+
+            public function activateCompany(Company $company){
+            try{
+            $company->deletion_indicator = "No";
+            $company->save();
+            Alert::success('Success', 'Company activated successfully')->autoClose(3000);
+            return redirect()->route('company.list')->with('success', 'Company activated successfully!');
+            } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to activate company. Please try again.')->withInput();
+            }
+            }
 
     public function apiStoreCompany(Request $request)
     {
