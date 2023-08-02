@@ -60,6 +60,9 @@ class User extends Authenticatable implements JWTSubject
     public function daily_inspections_summary(): HasMany{
         return $this->hasMany(DailyInspectionSummary::class, 'user_id');
     }
+    public function issue(): HasMany{
+        return $this->hasMany(Issue::class, 'user_id');
+    }
 
     public function companies(): BelongsTo{
         return $this->belongsTo(Company::class, 'company_code', 'company_code');

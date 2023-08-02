@@ -149,7 +149,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="../forms/editors.html" class="nav-link">
+                                    <a href="{{ route('issue.area') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Issue</p>
                                     </a>

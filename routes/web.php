@@ -5,6 +5,7 @@ use App\Http\Controllers\app\AnswerController;
 use App\Http\Controllers\app\AreaController;
 use App\Http\Controllers\app\CompanyController;
 use App\Http\Controllers\app\InspectionController;
+use App\Http\Controllers\app\IssueController;
 use App\Http\Controllers\app\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\LoginController;
@@ -82,3 +83,10 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/profile', [ProfilController::class, 'showProfile'])->name('auth.profile');
 Route::get('/change-password', [ProfilController::class, 'getChangePassword'])->name('change.password');
 Route::post('/change-password', [ProfilController::class, 'changePassword'])->name('store.password');
+
+// issue
+Route::get('/list-area-issue', [IssueController::class, 'showListArea'])->name('issue.area');
+Route::get('/list-inspection-issue/{area}', [IssueController::class, 'showInspectionIssue'])->name('issue.inspection');
+Route::get('/detail-issue/{dailyInspectionSummary}', [IssueController::class, 'showIssues'])->name('issue.detail');
+Route::get('/show-issue/{issue}', [IssueController::class, 'issueShow'])->name('issue.show');
+Route::post('/close-issue/{issue}', [IssueController::class, 'closeIssue'])->name('issue.close');
