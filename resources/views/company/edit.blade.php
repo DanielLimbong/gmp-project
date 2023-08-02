@@ -22,6 +22,10 @@
       <input class="form-check-input" type="checkbox" name="status" value="active">
       <label class="form-check-label">Activate</label>
     </div> --}}
+					<div class="form-check">
+        <input class="form-check-input" type="checkbox" name="status" value="deactive" placeholder="{{ $company->deletion_indicator }}" {{ $company->deletion_indicator === 'Yes' ? 'checked' : '' }}>
+        <label class="form-check-label">Deletion Indicator</label>
+    </div>
 		</div>
 		<div class="card-footer">
 			<button type="submit" class="btn btn-primary">Submit</button>

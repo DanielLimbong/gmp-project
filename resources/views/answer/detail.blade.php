@@ -21,21 +21,22 @@
 
 
       <div class="card-body table-responsive p-2">
-        <table class="table table-hover text-nowrap" id="answer_detail">
+        <table class="table table-hover" style="width: 100%" id="answer_detail">
           <thead>
             <tr>
-              <th>No</th>
-              <th>Answer</th>
-              <th>Point</th>
-              <th>Score Point</th>
+              <th >No</th>
+              <th >Answer</th>
+              <th >Point</th>
+              <th width=25>Score Point</th>
               {{-- <th>Reason</th> --}}
             </tr>
           </thead>
           <tbody>
+
             @foreach ($answers as $answer)
             <tr>
               <td>{{ $answer->point }}</td>
-              <td>{{ $answer->answer }}</td>
+              <td style="overflow-wrap: break-word">{{ $answer->answer }}</td>
               <td>{{ $answer->point }} point</td>
               <td>{{ ($answer->point)*($question->weight) }}</td>
               {{-- <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td> --}}

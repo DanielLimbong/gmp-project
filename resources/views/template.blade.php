@@ -23,7 +23,12 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- @include('sweetalert::alert') --}}
     <script src="sweetalert2.all.min.js"></script>
-
+<style>
+        .break-word {
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+</style>
 
 
   
