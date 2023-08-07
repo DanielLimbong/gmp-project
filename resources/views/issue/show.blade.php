@@ -6,9 +6,9 @@
 
 @section('content')
 <div class="mb-3 d-flex justify-content-end">
-<form action="{{ route('issue.close', $issue) }}" method="POST">
+<form action="{{ route('issue.onprogress', $issue) }}" method="POST">
 @csrf
-<button type="submit" class="btn btn-primary btn-lg mr-2"  @if($issue->status === 'Close') disabled @endif>On Progress Issue</button>
+<button type="submit" class="btn btn-primary btn-lg mr-2"  @if($issue->status === 'On Progress' || $issue->status === 'Close') disabled @endif>On Progress Issue</button>
 </form>
 <form action="{{ route('issue.close', $issue) }}" method="POST">
     @csrf

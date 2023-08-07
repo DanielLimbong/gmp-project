@@ -82,4 +82,16 @@ public function closeIssue(Request $request, Issue $issue){
     return redirect()->back()->with('error', 'The issue is already closed.');
     }
     }
+
+    public function onprogressIssue(Request $request, Issue $issue)
+    {
+    // Update the issue's status to "On Progress"
+    $issue->status = 'On Progress';
+    // ... other closing logic ...
+    $issue->save();
+
+    Alert::success('Success', 'Issue updated to On Progress.')->autoClose(3000);
+    return redirect()->back()->with('success', 'Issue updated to On Progress.');
+    }
+
 }

@@ -27,8 +27,9 @@ class AnswerController extends Controller
 
         public function detailAnswer(Question $question){
             $answers = Answer::where('question_id', '=', $question->id)->get();
+            $area = Area::where('id', $question->area_id)->first();
 
-            return view('answer.detail', ['question' => $question, 'answers' => $answers]);
+            return view('answer.detail', ['question' => $question, 'answers' => $answers, 'area' => $area]);
         }
         public function getCreateForm(Question $question){
             // $areas = Area::all();

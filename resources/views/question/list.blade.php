@@ -1,6 +1,6 @@
 @extends('template')
 @section('header')
-    <h2>List Question</h2>
+    <h2>List Question {{ $area->area_name }}</h2>
 @endsection
 @section('content')
 @if(session('success'))

@@ -10,9 +10,53 @@
                 <a href="{{ route('answer.create', $question) }}" class="btn btn-success ml-2" style="width: 150px;">
                     <i class="fas fa-plus"></i> Create
                 </a>
+                <a href="{{ route('answer.list', $area )}}"" class="btn btn-danger ml-2" style="width: 150px;"><i class="fas fa-chevron-left"></i> Back </a>
             </div>
         </div>
     </div>
+</div>
+  <br>
+  <div class="row">
+  <div class="col-md-6">
+	<div class="card">
+		<div class="card-header">
+			<h3 class="card-title">
+			{{-- <i class="fas fa-info"></i> --}}
+			 Question {{ $question->id }}</h3>
+		</div>
+		<div class="card-body">
+			<blockquote>
+				<p>
+					 {{ $question->question }}
+				</p>
+				 {{-- <small>Someone famous in <cite title="Source Title">Source Title</cite></small> --}}
+			</blockquote>
+		</div>
+	</div>
+</div>
+<div class="col-md-6">
+	<div class="card">
+		<div class="card-header">
+			<h3 class="card-title">
+			{{-- <i class="fas fa-text-width"></i> --}}
+			Detail </h3>
+		</div>
+		<div class="card-body">
+			<blockquote>
+        <small>Area <cite title="Source Title"> : </cite></small>
+				<p>
+					 {{ $question->areas->area_name }}
+				</p>
+			</blockquote>
+			<blockquote>
+        <small>Weight <cite title="Source Title"> : </cite></small>
+				<p>
+					 {{ $question->weight }}
+				</p>
+			</blockquote>
+		</div>
+	</div>
+</div>
 </div>
   <br>
   <div class="row p-2">

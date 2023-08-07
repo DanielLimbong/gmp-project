@@ -1,6 +1,6 @@
 @extends('template')
 @section('header')
-    <h1>List Area</h1>
+    <h1>List Question</h1>
 @endsection
 @section('content')
     <div class="container-fluid">

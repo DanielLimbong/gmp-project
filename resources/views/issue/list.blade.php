@@ -60,7 +60,7 @@
 												</style>
 													<td class="text-center">
 															<div class="d-flex justify-content-center align-items-center" style="height: 100%;">
-																	<span class="badge badge-lg badge-pill badge-equal-size {{ $issue->status === 'Open' ? 'bg-primary' : ($issue->status === 'On Progress' ? 'bg-warning' : ($issue->status === 'Close' ? 'bg-danger' : '')) }}">
+																	<span class="badge badge-lg badge-pill badge-equal-size {{ $issue->status === 'Open' ? 'bg-warning' : ($issue->status === 'On Progress' ? 'bg-primary' : ($issue->status === 'Close' ? 'bg-success' : '')) }}">
 																			{{ $issue->status }}
 																	</span>
 															</div>

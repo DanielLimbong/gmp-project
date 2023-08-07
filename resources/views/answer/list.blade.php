@@ -1,6 +1,6 @@
 @extends('template')
 @section('header')
-    <h2>Select Question</h2>
+    <h2>List Answer</h2>
 @endsection
 @section('content')
     <div class="container-xxl">
