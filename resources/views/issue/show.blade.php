@@ -8,9 +8,20 @@
 <div class="mb-3 d-flex justify-content-end">
 <form action="{{ route('issue.close', $issue) }}" method="POST">
 @csrf
-<button type="submit" class="btn btn-success btn-lg mr-2"  @if($issue->status === 'Close') disabled @endif>Close Issue</button>
+<button type="submit" class="btn btn-primary btn-lg mr-2"  @if($issue->status === 'Close') disabled @endif>On Progress Issue</button>
 </form>
-    <a href="{{ route('issue.detail', $dailyInspectionSummary) }}" class="btn btn-danger btn-lg">Back</a>
+<form action="{{ route('issue.close', $issue) }}" method="POST">
+    @csrf
+    <!-- Tombol untuk memunculkan modal -->
+    <button type="button" class="btn btn-success btn-lg mr-2" @if($issue->status === 'Close') disabled @endif data-toggle="modal" data-target="#closeIssueModal">
+        Close Issue
+    </button>
+</form>
+
+@php
+    $area = \App\Models\Area::where('id', $issue->area_id)->first();  
+@endphp
+    <a href="{{ route('issue.list', $area) }}" class="btn btn-danger btn-lg">Back</a>
 </div>
 
 <style>
@@ -64,6 +75,31 @@
     </div>
   </div>
 </div>
+<!-- Modal untuk mengisi reasong close -->
+<div class="modal fade" id="closeIssueModal" tabindex="-1" role="dialog" aria-labelledby="closeIssueModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="closeIssueModalLabel">Close Issue</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Form untuk mengisi reason close -->
+                <form action="{{ route('issue.close', $issue) }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="reason">Reason:</label>
+                        <textarea class="form-control" id="closed_reason" name="closed_reason" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Close Issue</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.all.min.js"></script>
 

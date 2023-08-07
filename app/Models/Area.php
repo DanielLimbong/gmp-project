@@ -22,6 +22,9 @@ class Area extends Model
     public function answers(){
         return $this->hasMany(Answer::class, 'area_id');
     }
+    public function issues(){
+        return $this->hasMany(Issue::class, 'area_id');
+    }
 
     public function daily_inspection_summary(){
         return $this->hasMany(DailyInspectionSummary::class, 'area_id');

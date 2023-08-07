@@ -64,15 +64,22 @@
                                     </td>
                                     <td>{{ $row->numbering }}</td>
                                     <td>
-                                        <form action="{{ route('question.update', ['question' => $row->id]) }}" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            @if ($row->status == 'active')
-                                                <button type="submit" class="btn btn-danger view-area ml-4"> <i class="fas fa-times"></i></button>                                            @else
-                                                <button type="submit" class="btn btn-success view-area ml-4"><i class="fas fa-check"></i></button>
-                                            @endif
-                                        </form>
+                                        <div class="btn-group">
+                                            <a class="btn btn-primary view-area mr-2" href="{{ route('question.detail', $row) }}">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <form action="{{ route('question.update', ['question' => $row->id]) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                @if ($row->status == 'active')
+                                                    <button type="submit" class="btn btn-danger view-area mr-2"> <i class="fas fa-times"></i></button>
+                                                @else
+                                                    <button type="submit" class="btn btn-success view-area mr-2"><i class="fas fa-check"></i></button>
+                                                @endif
+                                            </form>
+                                        </div>
                                     </td>
+
                                 </tr>
                             @endforeach
                         </tbody>

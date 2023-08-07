@@ -25,6 +25,7 @@ Route::get('/welcome', [DashboardController::class, 'showDashboard'])->name('das
 
 // question
 Route::get('/question-show', [QuestionController::class, 'showQuestionArea'])->name('question.show');
+Route::get('/question-detail/{question}', [QuestionController::class, 'getDetailQuestion'])->name('question.detail');
 Route::get('/question-create', [QuestionController::class, 'getCreateForm'])->name('question.create');
 Route::get('/question-create', [QuestionController::class, 'getCreateForm'])->name('question.create');
 Route::post('/question-store', [QuestionController::class, 'createQuestion'])->name('question.store');
@@ -87,6 +88,7 @@ Route::post('/change-password', [ProfilController::class, 'changePassword'])->na
 // issue
 Route::get('/list-area-issue', [IssueController::class, 'showListArea'])->name('issue.area');
 Route::get('/list-inspection-issue/{area}', [IssueController::class, 'showInspectionIssue'])->name('issue.inspection');
+Route::get('/list-issue/{area}', [IssueController::class, 'listIssue'])->name('issue.list');
 Route::get('/detail-issue/{dailyInspectionSummary}', [IssueController::class, 'showIssues'])->name('issue.detail');
 Route::get('/show-issue/{issue}', [IssueController::class, 'issueShow'])->name('issue.show');
 Route::post('/close-issue/{issue}', [IssueController::class, 'closeIssue'])->name('issue.close');

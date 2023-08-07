@@ -66,8 +66,10 @@
                 <div class="form-group">
                     <label for="exampleSelectBorder">Select Roles</label>
                     <select class="custom-select form-control-border" id="exampleSelectBorder" name="roles">
-                        <option value="User">User</option>
-                        <option value="Admin">Admin</option>
+                        <option value="Administrator">Administrator</option>
+                        <option value="Reviewer as MIP">Reviewer as MIP</option>
+                        <option value="Reviewer as Contractor">Reviewer as Contractor</option>
+                        <option value="Operational Team">Operational Team</option>
                         {{-- @foreach ($areas as $item)
                             <option value="{{ $item->id }}">{{ $item->area_name }}</option>
                         @endforeach --}}

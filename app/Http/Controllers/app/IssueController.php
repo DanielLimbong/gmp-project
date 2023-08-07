@@ -47,13 +47,28 @@ class IssueController extends Controller
     public function issueShow(Issue $issue){
          $dailyInspectionSummary = DailyInspectionSummary::where('id', $issue->daily_inspection_summary_id)->first();
         return view('issue.show', ['issue' => $issue, 'dailyInspectionSummary' => $dailyInspectionSummary]);
+    }public function listIssue(Area $area)
+    {
+        $issues = Issue::where('area_id', $area->id)->get();
+
+        $dailyInspectionSummaries = $issues->map(function ($issue) {
+        return DailyInspectionSummary::find($issue->daily_inspection_summary_id);
+        })->filter();
+
+        return view('issue.list', [
+        'issues' => $issues,
+        'dailyInspectionSummaries' => $dailyInspectionSummaries,
+        'area' => $area,
+        ]);
     }
 
-public function closeIssue(Issue $issue){
+
+public function closeIssue(Request $request, Issue $issue){
     if ($issue->status !== 'Close') {
     // Ganti $issue->status menjadi "Close"
     $issue->status = 'Close';
     $issue->updater_id = auth()->user()->id;
+    $issue->closed_reason = $request->input('closed_reason');
     // Simpan perubahan ke dalam database
     $issue->save();
 

@@ -17,7 +17,7 @@
                         <div class="icon">
                             <i class="ion ion-bag"></i>
                         </div>
-                        <a href="{{ route('issue.inspection', $item) }}" class="small-box-footer">Go <i
+                        <a href="{{ route('issue.list', $item) }}" class="small-box-footer">Go <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>

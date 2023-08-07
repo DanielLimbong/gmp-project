@@ -153,5 +153,14 @@ return redirect()->back()->with('success', 'Status berhasil diubah.');
         }
 
 
+public function getDetailQuestion(Question $question){
+    $answers = Answer::where('question_id', $question->id);
+    $area = Area::where('id', $question->area_id)->first();
+    return view('question.detail', [
+        'question' => $question,
+        'answers'=> $answers,
+        'area' => $area,
+    ]);
+}
 
 }

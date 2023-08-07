@@ -14,9 +14,11 @@ class Issue extends Model
     protected $fillable = [
     'user_id',
     'question_id',
+    'area_id',
     'daily_inspection_summary_id',
     'issue',
     'status',
+    'closed_reason',
     'created_at',
     'updated_at',
     'updater_id'
@@ -28,6 +30,9 @@ class Issue extends Model
     }
     public function questions(): BelongsTo{
         return $this->belongsTo(Question::class, 'question_id');
+    }
+    public function areas(): BelongsTo{
+        return $this->belongsTo(Area::class, 'area_id');
     }
     public function daily_inspection_summary(): BelongsTo{
         return $this->belongsTo(DailyInspectionSummary::class, 'daily_inspection_summary_id');
