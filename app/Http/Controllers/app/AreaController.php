@@ -58,10 +58,10 @@ class AreaController extends Controller
     try{
     $area->deletion_indicator = "Yes";
     $area->save();
-    Alert::success('Success', 'company deleted successfully')->autoClose(3000);
-    return redirect()->route('area.list')->with('success', 'Company deleted successfully!');
+    Alert::success('Success', 'Area deleted successfully')->autoClose(3000);
+    return redirect()->route('user.area')->with('success', 'Area deleted successfully!');
     } catch (\Exception $e) {
-    return redirect()->back()->with('error', 'Failed to delete company. Please try again.')->withInput();
+    return redirect()->back()->with('error', 'Failed to delete area. Please try again.')->withInput();
     }
     }
 
@@ -69,10 +69,10 @@ class AreaController extends Controller
     try{
     $area->deletion_indicator = "No";
     $area->save();
-    Alert::success('Success', 'Company activated successfully')->autoClose(3000);
-    return redirect()->route('area.list')->with('success', 'Company activated successfully!');
+    Alert::success('Success', 'Area activated successfully')->autoClose(3000);
+    return redirect()->route('user.area')->with('success', 'Area activated successfully!');
     } catch (\Exception $e) {
-    return redirect()->back()->with('error', 'Failed to activate company. Please try again.')->withInput();
+    return redirect()->back()->with('error', 'Failed to activate area. Please try again.')->withInput();
     }
     }
 }

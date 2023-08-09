@@ -53,29 +53,22 @@
                                             </div>
                                         </div>                      
                                     </div>
-                                        <div class="d-flex">
-                                            @if ($dailyInspectionSummary->status === 'Approved')
-                                                <button class="btn btn-info form-control" disabled>
-                                                    Update Point
-                                                </button>
-                                                <button class="btn btn-success ml-2 form-control" disabled> Approved</button>
-                                            @else
+<div class="d-flex">
+    @if (auth()->user()->role === 'Administrator' || auth()->user()->role === 'Operational Team')
+        @if ($dailyInspectionSummary->status === 'Approved')
+            <button class="btn btn-info form-control" disabled>
+                Update Point
+            </button>
+            <button class="btn btn-success ml-2 form-control" disabled> Approved</button>
+        @else
+            <button class="btn btn-info ml-2 form-control" data-toggle="modal" data-target="#updatePointModal">
+                Update Point
+            </button>
+            <button class="btn btn-success ml-2 form-control" onclick="approveStatus('{{ route("update.status", $dailyInspectionSummary) }}')">Approved</button>
+        @endif
+    @endif
+</div>
 
-                                                <button class="btn btn-info ml-2 form-control" data-toggle="modal" data-target="#updatePointModal">
-                                                    Update Point
-                                                </button>
-                                                <button class="btn btn-success ml-2 form-control" onclick="approveStatus('{{ route("update.status", $dailyInspectionSummary) }}')">Approved</button>
-
-                                                {{-- </form> --}}
-                                                {{-- <button class="btn btn-info form-control mr-4" data-toggle="modal" data-target="#updatePointModal">
-                                                    Update Point
-                                                </button>
-                                                <form action="{{ route("update.status", $dailyInspectionSummary) }}" method="POST">
-                                                    @csrf
-                                                    <button class="btn btn-success mr-4 form-control" type="submit"> Approved</button>
-                                                </form> --}}
-                                            @endif
-                                        </div>
 
                         </div>
                     </div>

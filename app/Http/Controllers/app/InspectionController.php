@@ -121,6 +121,7 @@ class InspectionController extends Controller
         $areaId = $question->area_id;
         $prefix = date('y') . 'DI' . str_pad($areaId, 3, '0', STR_PAD_LEFT);
         $id = IdGenerator::generate(['table' => 'daily_inspection_summaries', 'length' => 13, 'prefix' => $prefix]);
+        // return $id;
         $dailyInspectionSummary = new DailyInspectionSummary;
         $dailyInspectionSummary->id = $id;
         $dailyInspectionSummary->created_at = $item['created_at'];

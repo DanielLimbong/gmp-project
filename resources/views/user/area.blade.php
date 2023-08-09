@@ -53,17 +53,44 @@
 					<td class="align-middle">{{ $area->id }}</td>
 					<td class="align-middle">{{ $area->area_name }}</td>
                     <td class="align-middle">{{ $area->created_at }}</td>
-					<td class="align-middle">{{ $area->deletion_indicator }}</td>
+<td class="align-middle">
+    @if ($area->deletion_indicator === 'No')
+        Active
+    @elseif ($area->deletion_indicator === 'Yes')
+        Deactived
+    @else
+        <!-- Tampilkan pesan jika nilai deletion_indicator tidak sama dengan 'No' atau 'Yes' -->
+        Unknown
+    @endif
+</td>
 					<td class="project-actions text-right">
+                         <div class="d-flex">
 							<button class="btn btn-primary  view-area ml-4" data-toggle="modal" data-target="#viewAreaModal" data-area="{{ $area }}">
 									<i class="fas fa-eye"></i> 
 							</button>
 							<a class="btn btn-info ml-4" href="{{ route('area.edit', $area) }}">
 									<i class="fas fa-pencil-alt"></i> 
 							</a>
-							<a class="btn btn-danger ml-4" href="#">
+							{{-- <a class="btn btn-danger ml-4" href="#">
+
 									<i class="fas fa-times-circle"></i> 
-							</a>
+							</a> --}}
+                                                                    @if ($area->deletion_indicator === 'Yes')
+																		<form action="{{ route('area.activate', $area) }}" method="POST">
+																				@csrf
+																				<button type="submit" class="btn btn-success  ml-4">
+																						<i class="fas fa-check-square"></i> 
+																				</button>
+																		</form>
+																@else
+																		<form action="{{ route('area.delete', $area) }}" method="POST">
+																				@csrf
+																				<button type="submit" class="btn btn-danger btn ml-4">
+																						<i class="fas fa-times-circle"></i> 
+																				</button>
+																		</form>
+																@endif
+                         </div>
 					</td>
 					
 				</tr>

@@ -66,6 +66,8 @@ Route::get('/create-area', [AreaController::class, 'getCreateArea'])->name('area
 Route::post('/store-area', [AreaController::class, 'storeArea'])->name('area.store');
 Route::get('/edit-area/{area}', [AreaController::class, 'getEditArea'])->name('area.edit');
 Route::post('/post-area/{area}', [AreaController::class, 'editArea'])->name('area.post');
+Route::post('/delete-area/{area}', [AreaController::class, 'deleteArea'])->name('area.delete');
+Route::post('/activate-area/{area}', [AreaController::class, 'activateArea'])->name('area.activate');
 
 // company
 Route::get('list-company', [CompanyController::class, 'getCompany'])->name('company.list');
