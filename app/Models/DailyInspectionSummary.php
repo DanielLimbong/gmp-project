@@ -17,7 +17,9 @@ class DailyInspectionSummary extends Model
     'area_id',
     'score_total',
     'updated_at',
+    'status',
     'location',
+    'image',
     ];
     protected $keyType = 'string';
 

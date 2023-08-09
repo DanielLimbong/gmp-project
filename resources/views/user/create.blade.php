@@ -17,7 +17,7 @@
                 </div> --}}
                 <div class="form-group">
                     <label for="exampleSelectBorder">Select Company</label>
-                    <select class="custom-select form-control-border" id="exampleSelectBorder" name="company_code" aria-placeholder="Select Company">
+                    <select class="custom-select form-control-border" id="exampleSelectBorder" name="company_code" aria-placeholder="Select Company" required>
                         {{-- <option disabled hidden>Select Company</option> --}}
                         @foreach ($companies as $company)
                             <option value="{{ $company->company_code }}">{{ $company->name }}</option>
@@ -26,21 +26,21 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">NIK</label>
-                    <input type="text" class="form-control" id="weight" placeholder="Enter NIK" name="nik">
+                    <input type="text" class="form-control" id="weight" placeholder="Enter NIK" name="nik" required>
                 </div>
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Name</label>
-                    <input type="text" class="form-control" id="weight" placeholder="Enter Name" name="name">
+                    <input type="text" class="form-control" id="weight" placeholder="Enter Name" name="name" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email</label>
-                    <input type="email" class="form-control" id="weight" placeholder="Enter Email" name="email">
+                    <input type="email" class="form-control" id="weight" placeholder="Enter Email" name="email" required>
                 </div>
 
                 <div class="form-group">
                   <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Enter Password" name="password">
+                  <input type="password" class="form-control" id="password" placeholder="Enter Password" name="password" required>
                   <div class="input-group-append p-2">
                     <button class="btn btn-outline-secondary" type="button" id="showPasswordBtn" onclick="togglePasswordVisibility()">
                       Show
@@ -49,23 +49,23 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Confirm Password</label>
-                    <input type="password" class="form-control" id="confirm_password" placeholder="Enter Password" name="confirm_password">
+                    <input type="password" class="form-control" id="confirm_password" placeholder="Confirm Password" name="confirm_password" required>
                     <div class="input-group-append p-2">
-                    <button class="btn btn-outline-secondary" type="button" id="showPasswordBtn" onclick="togglePasswordVisibility()">
+                    <button class="btn btn-outline-secondary" type="button" id="showConfPasswordBtn" onclick="toggleConfPasswordVisibility()" onkeyup="checkPasswordMatch()">
                       Show
                     </button>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Position</label>
-                    <input type="text" class="form-control" id="position" placeholder="Enter Position" name="position">
+                    <input type="text" class="form-control" id="position" placeholder="Enter Position" name="position" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Division</label>
-                    <input type="text" class="form-control" id="division" placeholder="Enter Division" name="division">
+                    <input type="text" class="form-control" id="division" placeholder="Enter Division" name="division" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleSelectBorder">Select Roles</label>
-                    <select class="custom-select form-control-border" id="exampleSelectBorder" name="roles">
+                    <select class="custom-select form-control-border" id="exampleSelectBorder" name="roles" required>
                         <option value="Administrator">Administrator</option>
                         <option value="Reviewer as MIP">Reviewer as MIP</option>
                         <option value="Reviewer as Contractor">Reviewer as Contractor</option>
@@ -100,6 +100,34 @@
       showPasswordBtn.textContent = "Show";
     }
   }
+  function toggleConfPasswordVisibility() {
+  var passwordInput = document.getElementById("confirm_password");
+  var showConfPasswordBtn = document.getElementById("showConfPasswordBtn");
+
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    showConfPasswordBtn.textContent = "Hide";
+  } else {
+    passwordInput.type = "password";
+    showConfPasswordBtn.textContent = "Show";
+  }
+}
+
+function checkPasswordMatch() {
+  var password = document.getElementById("password").value;
+  var confirmPassword = document.getElementById("confirm_password").value;
+  var confirmPassInput = document.getElementById("confirm_password");
+
+  if (password === confirmPassword) {
+    confirmPassInput.style.border = ""; // Reset border style
+  } else {
+    confirmPassInput.style.border = "2px solid red"; // Set border color to red
+  }
+}
+
+// Add event listeners after both functions are defined
+document.getElementById("confirm_password").addEventListener("keyup", checkPasswordMatch);
+
       Swal.fire(
         'Success',
         'User created successfully',

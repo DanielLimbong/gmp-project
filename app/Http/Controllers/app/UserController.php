@@ -25,8 +25,8 @@ class UserController extends Controller
     }
 
     public function getCreateUser(){
-        $companies = Company::all();
-        $companies = Company::all();
+        // $companies = Company::all();
+        $companies = Company::where('deletion_indicator', 'No')->get();
         return view ('user.create', ['companies' => $companies]);
     }
 
@@ -105,7 +105,7 @@ class UserController extends Controller
         try{
         $user->deletion_indicator = "Yes";
         $user->save();
-            Alert::success('Success', 'User deleted successfully')->autoClose(3000);
+            Alert::success('success', 'User deleted successfully')->autoClose(3000);
             return redirect()->route('user.detail')->with('success', 'User deleted successfully!');
             } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to delete user. Please try again.')->withInput();
@@ -115,7 +115,7 @@ class UserController extends Controller
         try{
         $user->deletion_indicator = "No";
         $user->save();
-            Alert::success('Success', 'User activated successfully')->autoClose(3000);
+            Alert::success('success', 'User activated successfully')->autoClose(3000);
             return redirect()->route('user.detail')->with('success', 'User activated successfully!');
             } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to activated user. Please try again.')->withInput();

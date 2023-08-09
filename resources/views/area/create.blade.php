@@ -12,7 +12,7 @@
 		<div class="card-body">
 			<div class="form-group">
 				<label for="exampleInputEmail1">Area Name</label>
-				<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter area name" name="name"></div>
+				<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter area name" name="name" required></div>
     <div class="form-check">
       <input class="form-check-input" type="checkbox" name="status" value="active">
       <label class="form-check-label">Activate</label>

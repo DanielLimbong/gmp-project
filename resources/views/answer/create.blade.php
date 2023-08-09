@@ -15,12 +15,12 @@
 
                   <div class="form-group">
                       <label>Input Answer</label>
-                      <textarea class="form-control" rows="3" placeholder="Enter Question" name="text"> {{ $question->text }}</textarea>
+                      <textarea class="form-control" rows="3" placeholder="Enter Question" name="text" required></textarea>
                   </div>
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Point</label>
-                    <input type="text" class="form-control" id="weight" placeholder="Enter point" name="point">
+                    <input type="text" class="form-control" id="weight" placeholder="Enter point" name="point" required>
                 </div>
 
 

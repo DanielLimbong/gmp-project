@@ -9,6 +9,7 @@ use App\Models\Area;
 use Illuminate\Http\Request;
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class QuestionController extends Controller
 {
@@ -37,7 +38,7 @@ class QuestionController extends Controller
         'area_id' => 'required|exists:areas,id',
         ]);
 
-        $status = $request->has('activate_question') ? 'active' : 'non-nactive';
+        $status = $request->has('status') ? 'active' : 'non-nactive';
         // Buat pertanyaan baru dengan data yang valid
         $question = new Question;
         $question->question = $validatedData['question'];
@@ -87,8 +88,9 @@ if ($question->status === 'non-active') {
 $question->numbering = 0; // Set nomor pertanyaan menjadi 0 jika status menjadi non-active
 }
 
-$question->save(); // Menyimpan perubahan status dan nomor pertanyaan
-
+$question->save(); 
+// Menyimpan perubahan status dan nomor pertanyaan
+Alert::success('Success', 'User Deactived!')->autoClose(3000);
 return redirect()->back()->with('success', 'Status berhasil diubah.');
 }
 

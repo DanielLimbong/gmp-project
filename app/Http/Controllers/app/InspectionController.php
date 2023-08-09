@@ -76,7 +76,7 @@ class InspectionController extends Controller
         $dailyInspectionSummary->status = "Approved";
         $dailyInspectionSummary->save();
         Alert::success('success', 'Score Total Updated!')->autoClose(3000);
-        return redirect()->route("inspection.detail", $dailyInspectionSummary)->with('success', 'Score Total Updated!');
+        return redirect()->route("inspection.detail", $dailyInspectionSummary);
         } catch (\Exception $e) {
         return redirect()->route("inspection.detail", $dailyInspectionSummary)->with('error', 'Failed to update Score Total.
         Please try again.')->withInput();
@@ -91,6 +91,16 @@ class InspectionController extends Controller
         foreach ($inspectionData as $item) {
         $question = Question::find($item['question_id']);
         $answer = Answer::find($item['answer_id']);
+        if ($request->hasFile('image')) {
+            $uploadedImage = $request->file('image');
+            $imageName = uniqid() . '.' . $uploadedImage->getClientOriginalExtension();
+            $imagePath = 'apkImages/' . $imageName;
+            $uploadedImage->move(public_path('apkImages'), $imageName);
+            $imageUrl = url('apkImages/' . $imageName);
+
+            // Tambahkan URL gambar ke dalam data inspeksi
+            $item['image'] = $imageUrl;
+        }
 
         if ($question && $answer) {
         $area = Area::find($question->area_id);
@@ -119,6 +129,8 @@ class InspectionController extends Controller
         $dailyInspectionSummary->area_id = $areaId;
         $dailyInspectionSummary->score_total = $total;
         $dailyInspectionSummary->status = "NA";
+        $dailyInspectionSummary->location = $item['location'];
+        $dailyInspectionSummary->image = $item['image'];
         // dd($dailyInspectionSummary);
         
 

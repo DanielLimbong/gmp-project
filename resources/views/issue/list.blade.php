@@ -14,11 +14,11 @@
         <table class="table table-head-fixed text-nowrap" id="daily_Inspection_Summary_Table">
             <thead>
                 <tr>
-                    <th class="text-center">ID</th>
+                    {{-- <th class="text-center">ID</th> --}}
+                    <th class="text-center">Status</th>
                     <th class="text-center">Submitter</th>
                     <th class="text-center">Question ID</th>
                     <th class="text-center">Daily Inspection ID</th>
-                    <th class="text-center">Status</th>
                     <th class="text-center">Created</th>
                     <th class="text-center">Updated</th>
                     {{-- <th class="text-center">Updater</th> --}}
@@ -27,15 +27,22 @@
             </thead>
             <tbody>
                 @foreach ($issues->sortBy('questions.numbering') as $issue)
-                    @php
+                @php
                         if ($issue->updater_id !== null) {
                             $updater = \App\Models\User::find($issue->updater_id);
                         } else {
                             $updater = null;
                         }
-                    @endphp
+                        @endphp
                     <tr>
-                        <td class="text-center">{{ $issue->id }}</td>
+                        <td class="text-center">
+                                <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
+                                        <span class="badge badge-lg badge-pill badge-equal-size {{ $issue->status === 'Open' ? 'bg-warning' : ($issue->status === 'On Progress' ? 'bg-primary' : ($issue->status === 'Close' ? 'bg-success' : '')) }}">
+                                                {{ $issue->status }}
+                                        </span>
+                                </div>
+                        </td>
+                        {{-- <td class="text-center">{{ $issue->id }}</td> --}}
                         <td class="text-center">{{ $issue->users->name }}</td>
                         <td class="text-center">{{ $issue->question_id }}</td>
                         <td class="text-center">
@@ -58,13 +65,6 @@
 																justify-content: center;
 														}
 												</style>
-													<td class="text-center">
-															<div class="d-flex justify-content-center align-items-center" style="height: 100%;">
-																	<span class="badge badge-lg badge-pill badge-equal-size {{ $issue->status === 'Open' ? 'bg-warning' : ($issue->status === 'On Progress' ? 'bg-primary' : ($issue->status === 'Close' ? 'bg-success' : '')) }}">
-																			{{ $issue->status }}
-																	</span>
-															</div>
-													</td>
 
                         <td class="text-center">{{ $issue->created_at->formatLocalized('%d %B %Y') }}</td>
                         <td class="text-center">

@@ -10,16 +10,16 @@
             <div class="card-body">
                 <div class="form-group">
                     <label>Textarea</label>
-                    <textarea class="form-control" rows="3" placeholder="Enter Question" name="question"></textarea>
+                    <textarea class="form-control" rows="3" placeholder="Enter Question" name="question" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Weight</label>
-                    <input type="text" class="form-control" id="weight" placeholder="Enter weight" name="weight">
+                    <input type="text" class="form-control" id="weight" placeholder="Enter weight" name="weight" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleSelectBorder">Select Area</label>
-                    <select class="custom-select form-control-border" id="exampleSelectBorder" name="area_id">
-                        <option selected disabled hidden>Select Area</option>
+                    <select class="custom-select form-control-border" id="exampleSelectBorder" name="area_id" required>
+                        {{-- <option selected disabled hidden>Select Area</option> --}}
                         @foreach ($areas as $item)
                             <option value="{{ $item->id }}">{{ $item->area_name }}</option>
                         @endforeach

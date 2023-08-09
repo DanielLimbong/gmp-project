@@ -155,14 +155,25 @@
         // Atur callback saat permintaan selesai
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    // Berhasil memperbarui status
-                    console.log('Status berhasil diperbarui.');
-                    // Jika Anda ingin melakukan tindakan tambahan setelah berhasil memperbarui status, tambahkan di sini.
+if (xhr.status === 200) {
+    // Berhasil memperbarui status
+    console.log('Status berhasil diperbarui.');
 
-                    // Refresh halaman setelah berhasil memperbarui status
-                    window.location.reload();
-                } else {
+    // Tampilkan SweetAlert berhasil
+    Swal.fire({
+        icon: 'success',
+        title: 'Approved',
+        text: 'Daily Inspection Approved',
+        showConfirmButton: false,
+        timer: 2000 // Durasi pemberitahuan dalam milidetik
+    });
+
+    // Refresh halaman setelah berhasil memperbarui status
+    setTimeout(function() {
+        window.location.reload();
+    }, 2000); // Waktu penundaan sebelum refresh (2 detik dalam contoh ini)
+}
+ else {
                     // Gagal memperbarui status
                     console.error('Gagal memperbarui status.');
                     // Jika Anda ingin menampilkan pesan error atau melakukan tindakan tambahan setelah gagal memperbarui status, tambahkan di sini.
@@ -179,5 +190,27 @@
         // Kirim permintaan
         xhr.send();
     }
+    if (window.performance) {
+            var navEntries = window.performance.getEntriesByType('navigation');
+            if (navEntries.length > 0 && navEntries[0].type === 'back_forward') {
+                // console.log('As per API lv2, this page is load from back/forward'); 
+            } else
+            if (window.performance.navigation && window.performance.navigation.type == window.performance.navigation
+                .TYPE_BACK_FORWARD) {
+                // console.log('As per API lv1, this page is load from back/forward'); 
+            } else {
+                // console.log('This is normal page load'); 
+                @if (session()->exists('success'))
+                   
+                    {{ session()->forget('success') }}
+                @endif
+                @if (session()->exists('error'))
+                    {{ session()->forget('error') }}
+                @endif
+            }
+        } else {
+            console.log("Unfortunately, your browser doesn't support this API");
+    }
     </script>
+
 @endsection
