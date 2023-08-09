@@ -91,16 +91,16 @@ class InspectionController extends Controller
         foreach ($inspectionData as $item) {
         $question = Question::find($item['question_id']);
         $answer = Answer::find($item['answer_id']);
-        if ($request->hasFile('image')) {
-            $uploadedImage = $request->file('image');
-            $imageName = uniqid() . '.' . $uploadedImage->getClientOriginalExtension();
-            $imagePath = 'apkImages/' . $imageName;
-            $uploadedImage->move(public_path('apkImages'), $imageName);
-            $imageUrl = url('apkImages/' . $imageName);
+        // if ($request->hasFile('image')) {
+        //     $uploadedImage = $request->file('image');
+        //     $imageName = uniqid() . '.' . $uploadedImage->getClientOriginalExtension();
+        //     $imagePath = 'apkImages/' . $imageName;
+        //     $uploadedImage->move(public_path('apkImages'), $imageName);
+        //     $imageUrl = url('apkImages/' . $imageName);
 
-            // Tambahkan URL gambar ke dalam data inspeksi
-            $item['image'] = $imageUrl;
-        }
+        //     // Tambahkan URL gambar ke dalam data inspeksi
+        //     $item['image'] = $imageUrl;
+        // }
 
         if ($question && $answer) {
         $area = Area::find($question->area_id);
@@ -130,7 +130,7 @@ class InspectionController extends Controller
         $dailyInspectionSummary->score_total = $total;
         $dailyInspectionSummary->status = "NA";
         $dailyInspectionSummary->location = $item['location'];
-        $dailyInspectionSummary->image = $item['image'];
+        // $dailyInspectionSummary->image = $item['image'];
         // dd($dailyInspectionSummary);
         
 

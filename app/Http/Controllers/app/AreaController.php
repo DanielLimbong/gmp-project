@@ -10,6 +10,7 @@ use App\Models\Area;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 class AreaController extends Controller
 {
     public function getCreateArea(){
@@ -52,4 +53,26 @@ class AreaController extends Controller
             $areas = Area::all();
             return response()->json($areas);
         }
+
+    public function deleteArea(Area $area){
+    try{
+    $area->deletion_indicator = "Yes";
+    $area->save();
+    Alert::success('Success', 'company deleted successfully')->autoClose(3000);
+    return redirect()->route('area.list')->with('success', 'Company deleted successfully!');
+    } catch (\Exception $e) {
+    return redirect()->back()->with('error', 'Failed to delete company. Please try again.')->withInput();
+    }
+    }
+
+    public function activateArea(Area $area){
+    try{
+    $area->deletion_indicator = "No";
+    $area->save();
+    Alert::success('Success', 'Company activated successfully')->autoClose(3000);
+    return redirect()->route('area.list')->with('success', 'Company activated successfully!');
+    } catch (\Exception $e) {
+    return redirect()->back()->with('error', 'Failed to activate company. Please try again.')->withInput();
+    }
+    }
 }
