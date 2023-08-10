@@ -58,7 +58,7 @@ class AreaController extends Controller
     try{
     $area->deletion_indicator = "Yes";
     $area->save();
-    Alert::success('Success', 'Area deleted successfully')->autoClose(3000);
+    Alert::success('Success', 'Area deactived successfully')->autoClose(3000);
     return redirect()->route('user.area')->with('success', 'Area deleted successfully!');
     } catch (\Exception $e) {
     return redirect()->back()->with('error', 'Failed to delete area. Please try again.')->withInput();

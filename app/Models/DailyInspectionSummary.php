@@ -19,7 +19,7 @@ class DailyInspectionSummary extends Model
     'updated_at',
     'status',
     'location',
-    'image',
+    // 'image',
     ];
     protected $keyType = 'string';
 
