@@ -94,4 +94,5 @@ Route::get('/list-issue/{area}', [IssueController::class, 'listIssue'])->name('i
 Route::get('/detail-issue/{dailyInspectionSummary}', [IssueController::class, 'showIssues'])->name('issue.detail');
 Route::get('/show-issue/{issue}', [IssueController::class, 'issueShow'])->name('issue.show');
 Route::post('/close-issue/{issue}', [IssueController::class, 'closeIssue'])->name('issue.close');
+// Route::post('/onprogress-issue/{issue}', [IssueController::class, 'onProgressIssue'])->name('issue.onprogress');
 Route::post('/onprogress-issue/{issue}', [IssueController::class, 'onprogressIssue'])->name('issue.onprogress');

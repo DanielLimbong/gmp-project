@@ -69,6 +69,20 @@ public function closeIssue(Request $request, Issue $issue){
     $issue->status = 'Close';
     $issue->updater_id = auth()->user()->id;
     $issue->closed_reason = $request->input('closed_reason');
+                if ($request->hasFile('closed_photo')) {
+                $photoName = $request->file('closed_photo')->getClientOriginalName();
+                $photoPath = 'apkImages/' . $photoName;
+
+                // Save the photo path to the issue record in the database
+                $issue->image_closed = $photoPath;
+                $issue->save();
+
+                // Move the uploaded file to the desired directory
+                $request->file('closed_photo')->move(public_path('apkImages'), $photoPath);
+
+                }
+    // $issue->save();
+    
     // Simpan perubahan ke dalam database
     $issue->save();
 
@@ -87,6 +101,8 @@ public function closeIssue(Request $request, Issue $issue){
     {
     // Update the issue's status to "On Progress"
     $issue->status = 'On Progress';
+    $issue->updater_id = auth()->user()->id;
+    $issue->closed_reason = $request->input('onprogress_reason');
     // ... other closing logic ...
     $issue->save();
 

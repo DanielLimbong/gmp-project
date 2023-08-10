@@ -56,6 +56,14 @@ return [
             'throw' => false,
         ],
 
+        'custom_disk' => [
+        'driver' => 'local',
+        'root' => 'C:\Users\ASUS\Documents\GitHub\gmp-project\public\apkImages',
+        'url' => env('APP_URL').'/public/apkImages',
+        'visibility' => 'public',
+        ],
+
+
     ],
 
     /*
