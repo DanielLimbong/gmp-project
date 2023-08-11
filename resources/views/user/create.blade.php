@@ -65,7 +65,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleSelectBorder">Select Roles</label>
-                    <select class="custom-select form-control-border" id="exampleSelectBorder" name="roles" required>
+                    <select class="custom-select form-control-border" id="exampleSelectBorder" id="role" name="role" required>
                         <option value="Administrator">Administrator</option>
                         <option value="Reviewer as MIP">Reviewer as MIP</option>
                         <option value="Reviewer as Contractor">Reviewer as Contractor</option>

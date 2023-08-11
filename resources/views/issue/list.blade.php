@@ -34,6 +34,7 @@
                             $updater = null;
                         }
                         @endphp
+                         @if (auth()->user()->role == 'Administrator' || (auth()->user()->role == 'Operational Team' && auth()->user()->company_code == $issue->users->company_code))
                     <tr>
                         <td class="text-center">
                                 <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
@@ -78,6 +79,7 @@
                             <a href="{{ route('issue.show', $issue) }}" class="btn btn-info view-area"> <i class="fas fa-eye"></i> Detail</a>
                         </td>
                     </tr>
+                    @endif
                 @endforeach
             </tbody>
         </table>

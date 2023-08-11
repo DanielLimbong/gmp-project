@@ -47,7 +47,7 @@ class UserController extends Controller
         'password' => 'required',
         'position' => 'required',
         'division' => 'required',
-        'roles' => 'required',
+        'role' => 'required',
         'deletion_indicator' => 'nullable',
         ]);
 
@@ -60,6 +60,8 @@ class UserController extends Controller
         $user->password = Hash::make($request->input('password'));
         $user->position = $request->input('position');
         $user->division = $request->input('division');
+        $user->email_verified_at = now();
+        $user->first_time_pw = $request->input('password');
         $user->role = $request->input('role');
         $user->deletion_indicator = $request->has('deletion_indicator') ? 'Yes' : 'No';
         // dd($user);
@@ -67,6 +69,7 @@ class UserController extends Controller
         Alert::success('Success', 'User created successfully')->autoClose(3000);
         return redirect()->route('user.detail')->with('success', 'User created successfully!');
         } catch (\Exception $e) {
+        Alert::error('Error', $e)->autoClose(3000);
         return redirect()->back()->with('error', 'Failed to create user. Please try again.')->withInput();
         // dd($user);
         }

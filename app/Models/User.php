@@ -33,6 +33,7 @@ class User extends Authenticatable implements JWTSubject
         'nik',
         'role',
         'deletion_indicator',
+        'first_time_pw',
     ];
 
     protected $keyType = 'string';
