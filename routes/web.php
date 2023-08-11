@@ -10,6 +10,7 @@ use App\Http\Controllers\app\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\ProfilController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\DashboardController;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
@@ -22,6 +23,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     });
 // Dashboard
 Route::get('/welcome', [DashboardController::class, 'showDashboard'])->name('dashboard');
+Route::get('/get-dashboard', [DashboardController::class, 'listIssue'])->name('dashboard.table');
 
 // question
 Route::get('/question-show', [QuestionController::class, 'showQuestionArea'])->name('question.show');
@@ -96,3 +98,8 @@ Route::get('/show-issue/{issue}', [IssueController::class, 'issueShow'])->name('
 Route::post('/close-issue/{issue}', [IssueController::class, 'closeIssue'])->name('issue.close');
 // Route::post('/onprogress-issue/{issue}', [IssueController::class, 'onProgressIssue'])->name('issue.onprogress');
 Route::post('/onprogress-issue/{issue}', [IssueController::class, 'onprogressIssue'])->name('issue.onprogress');
+
+// chart
+Route::get('/get-area-chart-data', [ChartController::class, 'getAreaChartData']);
+Route::get('/get-issue-chart-data', [ChartController::class, 'getIssueChartData']);
+Route::get('/get-user-chart-data', [ChartController::class, 'getUserChartData']);
