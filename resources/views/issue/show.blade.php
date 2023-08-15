@@ -103,6 +103,7 @@
 </div>
 
 
+
 @endif
 <!-- Modal untuk mengisi reasong close -->
 <div class="modal fade" id="closeIssueModal" tabindex="-1" role="dialog" aria-labelledby="closeIssueModalLabel" aria-hidden="true">

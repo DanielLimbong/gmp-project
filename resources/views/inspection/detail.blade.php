@@ -37,6 +37,18 @@
                         <td>:</td>
                         <td>{{ $dailyInspectionSummary->created_at->format('H:i:s') }}</td>
                     </tr>
+                    <tr>
+                        <th class="vertical-header">Location</th>
+                        <td>:</td>
+                        <td>{{ $dailyInspectionSummary->location }}</td>
+                    </tr>
+                    {{-- <tr>
+                        <th class="vertical-header">Image</th>
+                        <td>:</td>
+                        <td>
+                            <img src="{{ asset($dailyInspectionSummary->image_location) }}" alt="">
+                        </td>
+                    </tr> --}}
                 </table>
             </div>
         </div>
@@ -125,6 +137,23 @@
             </div>
         </div>
     </div>
+
+<div class="col-md-8">
+            <div class="card p-2 w-100">
+                <!-- Isi card pertama -->
+                <table class="table-sm">
+                    <tr>
+                        <th class="vertical-header">Location Image</th>
+                        <td>:</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="{{ asset($dailyInspectionSummary->image_location) }}" alt="">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
 @endsection
 

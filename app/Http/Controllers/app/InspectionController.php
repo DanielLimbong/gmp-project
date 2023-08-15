@@ -140,6 +140,21 @@ class InspectionController extends Controller
        $dailyInspectionSummary->score_total = $total;
        $dailyInspectionSummary->status = "NA";
        $dailyInspectionSummary->location = $item['location'];
+       
+       $imageBit = $item['image_bytes'];
+       $image = imagecreatefromstring(pack('C*', ...$imageBit));
+       
+       $imagePath = 'inspection/';
+
+       // Dapatkan path ke direktori publik
+       $publicPath = public_path($imagePath);
+       $extension = 'jpg';
+       $imageFilename = $newId . '.' . $extension;
+       $imageFullPath = $publicPath . $imageFilename;
+       
+       // Simpan gambar dalam format JPEG
+       imagejpeg($image, $imageFullPath, 95); // Simpan gambar dalam format JPEG dengan kualitas 95%
+       $dailyInspectionSummary->image_location = $imagePath . $imageFilename;
 
        // Simpan entri baru ke dalam basis data
        $dailyInspectionSummary->save();
@@ -167,7 +182,7 @@ class InspectionController extends Controller
 
         } else {
         // Jika area tidak ditemukan
-        return response()->json(['message' => 'Invalid area data', 'id' => $id], 400);
+        return response()->json(['message' => 'Invalid area data', 'id' => $newId], 400);
         }
         } else {
         // Jika pertanyaan atau jawaban tidak ditemukan
