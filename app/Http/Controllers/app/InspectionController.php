@@ -118,24 +118,31 @@ class InspectionController extends Controller
         }
         }
 
-        $areaId = $question->area_id;
-        $prefix = date('y') . 'DI' . str_pad($areaId, 3, '0', STR_PAD_LEFT);
-        $id = IdGenerator::generate(['table' => 'daily_inspection_summaries', 'length' => 13, 'prefix' => $prefix]);
-        // return $id;
-        $dailyInspectionSummary = new DailyInspectionSummary;
-        $dailyInspectionSummary->id = $id;
-        $dailyInspectionSummary->created_at = $item['created_at'];
-        $dailyInspectionSummary->updated_at = $item['created_at'];
-        $dailyInspectionSummary->user_id = $item['user_id'];
-        $dailyInspectionSummary->area_id = $areaId;
-        $dailyInspectionSummary->score_total = $total;
-        $dailyInspectionSummary->status = "NA";
-        $dailyInspectionSummary->location = $item['location'];
-        // $dailyInspectionSummary->image = $item['image'];
-        // dd($dailyInspectionSummary);
-        
+       $areaId = $question->area_id;
+       $prefix = date('y') . 'DI' . str_pad($areaId, 3, '0', STR_PAD_LEFT);
 
-        $dailyInspectionSummary->save();
+       $lastId = DailyInspectionSummary::where('id', 'LIKE', "$prefix%")->orderBy('id', 'desc')->first();
+       $lastNumber = ($lastId) ? (int) substr($lastId->id, -6) : 0;
+
+       $newNumber = $lastNumber + 1;
+       $newNumberPadded = str_pad($newNumber, 6, '0', STR_PAD_LEFT);
+
+       $newId = $prefix . $newNumberPadded;
+
+       // Sekarang kita memiliki ID yang belum ada dalam basis data
+       // Lanjutkan dengan membuat entri baru
+       $dailyInspectionSummary = new DailyInspectionSummary;
+       $dailyInspectionSummary->id = $newId;
+       $dailyInspectionSummary->created_at = $item['created_at'];
+       $dailyInspectionSummary->updated_at = $item['created_at'];
+       $dailyInspectionSummary->user_id = $item['user_id'];
+       $dailyInspectionSummary->area_id = $areaId;
+       $dailyInspectionSummary->score_total = $total;
+       $dailyInspectionSummary->status = "NA";
+       $dailyInspectionSummary->location = $item['location'];
+
+       // Simpan entri baru ke dalam basis data
+       $dailyInspectionSummary->save();
 
         foreach ($inspectionData as $item) {
         $question = Question::find($item['question_id']);
@@ -149,7 +156,7 @@ class InspectionController extends Controller
         // $result = $question->weight * $answer->point;
         // $total += $result;
         $dailyInspection = new DailyInspection();
-        $dailyInspection->daily_inspection_summary_id = $id;
+        $dailyInspection->daily_inspection_summary_id = $newId;
         $dailyInspection->question_id = $item['question_id'];
         $dailyInspection->answer_id = $item['answer_id'];
         $dailyInspection->score_point = $score_point;
