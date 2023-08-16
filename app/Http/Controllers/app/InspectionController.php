@@ -183,7 +183,7 @@ class InspectionController extends Controller
         $dailyInspection->save();
         
         // issue
-        if ($item['issue']!== null && $item['issue']!== "") {
+        if ($item['issue']!== null || $item['issue']!== "") {
             // Create a new issue
             $issue = new Issue();
             $issue->user_id = $item['user_id'];
@@ -192,11 +192,11 @@ class InspectionController extends Controller
             $issue->daily_inspection_summary_id = $newId;
             $issue->issue = $item['issue'];
             $issue->status = "Open";
-            $issue->closed_reason = "-";
+            $issue->closed_reason = null;
             $issue->created_at = strtotime($item['created_at']);
             $issue->updated_at = strtotime($item['created_at']);
-            $issue->updater_id = "-";
-            $issue->image_closed = "-";
+            $issue->updater_id = null;
+            $issue->image_closed = null;
             $issue->save();
         }
 
