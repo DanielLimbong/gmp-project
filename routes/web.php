@@ -43,6 +43,7 @@ Route::get('/question-answer-list/{area}', [AnswerController::class, 'showListQu
 Route::get('/answer-detail/{question}', [AnswerController::class, 'detailAnswer'])->name('answer.detail');
 Route::get('/answer-create/{question}', [AnswerController::class, 'getCreateForm'])->name('answer.create');
 Route::post('/answer-store/{question}', [AnswerController::class, 'createAnswer'])->name('answer.store');
+Route::post('/answer-edit/{answer}', [AnswerController::class, 'editAnswer'])->name('answer.edit');
 
 // inpsection
 Route::get('/daily-inspection/{area}', [InspectionController::class, 'showInspection'])->name('inspection.show');
@@ -103,3 +104,4 @@ Route::post('/onprogress-issue/{issue}', [IssueController::class, 'onprogressIss
 Route::get('/get-area-chart-data', [ChartController::class, 'getAreaChartData']);
 Route::get('/get-issue-chart-data', [ChartController::class, 'getIssueChartData']);
 Route::get('/get-user-chart-data', [ChartController::class, 'getUserChartData']);
+Route::get('/get-issue-company-chart-data', [ChartController::class, 'getIssueperCompanyChartData']);

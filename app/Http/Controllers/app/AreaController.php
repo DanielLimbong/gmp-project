@@ -50,7 +50,7 @@ class AreaController extends Controller
     }
 
         public function areaIndex(){
-            $areas = Area::all();
+            $areas = Area::where('deletion_indicator', 'No')->get();
             return response()->json($areas);
         }
 

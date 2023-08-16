@@ -11,6 +11,7 @@ use App\Models\Company;
 use App\Models\Daily_Inspection_Summary;
 use App\Models\DailyInspection;
 use App\Models\DailyInspectionSummary;
+use App\Models\Issue;
 use App\Models\User;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -163,13 +164,15 @@ class InspectionController extends Controller
         $question = Question::find($item['question_id']);
         $answer = Answer::find($item['answer_id']);
         $score_point = $question->weight * $answer->point;
-
+        
         if ($question && $answer) {
-        $area = Area::find($question->area_id);
+            $area = Area::find($question->area_id);
 
         if ($area) {
         // $result = $question->weight * $answer->point;
         // $total += $result;
+
+        // DI
         $dailyInspection = new DailyInspection();
         $dailyInspection->daily_inspection_summary_id = $newId;
         $dailyInspection->question_id = $item['question_id'];
@@ -178,6 +181,24 @@ class InspectionController extends Controller
         $dailyInspection->created_at = strtotime($item['created_at']);
         $dailyInspection->updated_at = null;
         $dailyInspection->save();
+        
+        // issue
+        if ($item['issue']!== null && $item['issue']!== "") {
+            // Create a new issue
+            $issue = new Issue();
+            $issue->user_id = $item['user_id'];
+            $issue->question_id = $item['question_id'];
+            $issue->area_id = $areaId;
+            $issue->daily_inspection_summary_id = $newId;
+            $issue->issue = $item['issue'];
+            $issue->status = "Open";
+            $issue->closed_reason = "-";
+            $issue->created_at = strtotime($item['created_at']);
+            $issue->updated_at = strtotime($item['created_at']);
+            $issue->updater_id = "-";
+            $issue->image_closed = "-";
+            $issue->save();
+        }
 
 
         } else {

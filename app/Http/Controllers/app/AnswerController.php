@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Area;
+use RealRashid\SweetAlert\Facades\Alert;
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class AnswerController extends Controller
@@ -57,8 +58,27 @@ class AnswerController extends Controller
         $answer->save();
 
         // Redirect atau melakukan tindakan lainnya sesuai kebutuhan Anda
+        Alert::success('Success', 'Answer created successfully')->autoClose(3000);
         return redirect()->back()->with('success', 'Pertanyaan berhasil dibuat.');
         }
+        public function editAnswer(Request $request, Answer $answer)
+        {
+        // Validasi data input
+        $validatedData = $request->validate([
+        'text' => 'required',
+        'point' => 'required|integer',
+        ]);
+
+        // Update data jawaban yang ada dengan data yang valid
+        $answer->answer = $validatedData['text'];
+        $answer->point = $validatedData['point'];
+        $answer->save();
+
+        // Redirect atau melakukan tindakan lainnya sesuai kebutuhan Anda
+        Alert::success('Success', 'Answer edited successfully')->autoClose(3000);
+        return redirect()->back()->with('success', 'Jawaban berhasil diubah.');
+        }
+
         public function answerIndex($question_id){
         $answers = Answer::where('question_id', '=', $question_id)->get();
         return response()->json($answers);

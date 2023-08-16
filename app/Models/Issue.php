@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Issue extends Model
 {
     use HasFactory;
-    public $incrementing = false;
+    // public $incrementing = false;
     protected $fillable = [
     'user_id',
     'question_id',
@@ -21,9 +21,10 @@ class Issue extends Model
     'closed_reason',
     'created_at',
     'updated_at',
-    'updater_id'
+    'updater_id',
+    'image_closed',
     ];
-    protected $keyType = 'string';
+    // protected $keyType = 'string';
 
     public function users(): BelongsTo{
         return $this->belongsTo(User::class, 'user_id');

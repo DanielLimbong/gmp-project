@@ -157,6 +157,10 @@
                     <label for="userDivision">Role:</label>
                     <input type="text" class="form-control" id="userRole" readonly>
                 </div>
+                <div class="form-group">
+                    <label for="userDivision">First Password:</label>
+                    <input type="text" class="form-control" id="userFirstPassword" readonly>
+                </div>
                 <!-- Add more fields as needed to display user details -->
             </div>
             <div class="modal-footer">
@@ -184,6 +188,7 @@
             $('#userPosition').val(user.position);
             $('#userDivision').val(user.division);
             $('#userRole').val(user.role);
+            $('#userFirstPassword').val(user.first_time_pw);
 
             // Show the modal
             $('#viewUserModal').modal('show');

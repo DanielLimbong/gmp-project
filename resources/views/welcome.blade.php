@@ -53,7 +53,7 @@
             <!-- PIE CHART -->
             <div class="card card-danger collapsed-card">
               <div class="card-header">
-                <h3 class="card-title">Issue</h3>
+                <h3 class="card-title">User</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -78,7 +78,7 @@
             <!-- LINE CHART -->
             <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">User</h3>
+                <h3 class="card-title">Issue/Area</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -101,7 +101,7 @@
             <!-- BAR CHART -->
             <div class="card card-success collapsed-card">
               <div class="card-header">
-                <h3 class="card-title">Bar Chart</h3>
+                <h3 class="card-title">Issue/Company</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -133,7 +133,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Tabel</h3>
+                <h3 class="card-title">Closed Issue {{auth()->user()->companies->name  }}</h3>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -185,7 +185,7 @@
                             $updater = null;
                         }
                         @endphp
-                         @if (auth()->user()->role == 'Administrator' || (auth()->user()->role == 'Operational Team' && auth()->user()->company_code == $issue->users->company_code))
+                         @if ((auth()->user()->role == 'Operational Team' || auth()->user()->company_code == $issue->users->company_code))
                     <tr>
                         <td class="text-center">
                                 <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
@@ -274,6 +274,31 @@
     .then(data => {
       // Mengambil areaChart canvas
       var ctx = document.getElementById('lineChart').getContext('2d');
+
+      // Menggambar grafik area dengan data yang diterima dari server
+      new Chart(ctx, {
+        type: 'bar', // Ganti dengan 'bar' jika ingin grafik batang
+        data: {
+          labels: data.labels,
+          datasets: [{
+            label: 'Jumlah Issue',
+            data: data.dataset,
+            borderColor: 'rgba(0, 123, 255, 0.9)',
+            backgroundColor: 'rgba(0, 123, 255, 0.5)',
+            fill: true,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+        }
+      });
+    });
+  fetch('/get-issue-company-chart-data')
+    .then(response => response.json())
+    .then(data => {
+      // Mengambil areaChart canvas
+      var ctx = document.getElementById('barChart').getContext('2d');
 
       // Menggambar grafik area dengan data yang diterima dari server
       new Chart(ctx, {

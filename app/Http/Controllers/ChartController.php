@@ -50,4 +50,20 @@ class ChartController extends Controller
 
         return response()->json($data);
         }
+        public function getIssueperCompanyChartData(Request $request)
+        {
+        $companies = Company::all();
+        $data = [];
+
+        foreach ($companies as $company) {
+        $users = User::where('company_code', $company->company_code)->get();
+                foreach ($users as $user){
+                        $issues = Issue::where('user_id', $user->id)->count();
+                        $data['labels'][] = $company->name;
+                        $data['dataset'][] = $issues;
+        }
+        }
+
+        return response()->json($data);
+        }
 }

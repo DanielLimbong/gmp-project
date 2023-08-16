@@ -23,6 +23,7 @@ class ProfilController extends Controller
             $password = Hash::make($request->input('password'));
             $userId = auth()->user()->id;
             User::where('id', $userId)->update(['password' => $password]);
+            User::where('id', $userId)->update(['first_time' => '0']);
             // dd($user);
             Alert::success('success', 'Password changed successfully')->autoClose(3000);
             return redirect()->route('change.password')->with('success', 'Password changed successfully!');
